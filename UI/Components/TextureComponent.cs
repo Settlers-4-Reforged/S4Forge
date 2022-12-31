@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
+using S4_UIEngine.GameTypes;
+using S4_UIEngine.Rendering.Texture;
+
+namespace S4_UIEngine.UI.Components {
+    public class TextureComponent : IUIComponent {
+        public virtual ITexture Texture { get; set; }
+        public Vector2 Offset { get; set; } = Vector2.Zero;
+
+        //Whether this texture gets scaled to the UIElement Size or not
+        public bool Scaled { get; set; } = false;
+
+        public bool IsTeamColored { get; set; } = false;
+        public Team? Team { get; set; } = null;
+
+        protected TextureComponent() {}
+
+        public TextureComponent(ITexture texture) {
+            Texture = texture;
+        }
+
+        public static TextureComponent FromCollection(int collection, int id) {
+            return new TextureComponent(TextureCollectionManager.GetCollection(collection).GetTexture(id));
+        }
+    }
+}
