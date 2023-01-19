@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace S4_UIEngine.Rendering.Texture {
     public static class TextureCollectionManager {
-        private static readonly Dictionary<int, ITextureCollection> collections = new();
+        private static readonly Dictionary<int, ITextureCollection> collections = new Dictionary<int, ITextureCollection>();
 
         public static void AddCollection(int id, ITextureCollection collection) => collections.Add(id, collection);
 
