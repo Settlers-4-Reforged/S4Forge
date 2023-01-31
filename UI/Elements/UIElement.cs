@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using S4_UIEngine.Rendering;
+﻿using S4_UIEngine.Rendering;
 using S4_UIEngine.UI.Components;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace S4_UIEngine.UI.Elements {
     public abstract class UIElement {

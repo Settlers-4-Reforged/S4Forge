@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using S4_UIEngine.GameTypes;
+﻿using S4_UIEngine.GameTypes;
 using S4_UIEngine.Rendering.Texture;
+using System;
+using System.Numerics;
 
 namespace S4_UIEngine.UI.Components {
     public class TextureComponent : IUIComponent {
@@ -18,10 +14,10 @@ namespace S4_UIEngine.UI.Components {
         public bool IsTeamColored { get; set; } = false;
         public Team? Team { get; set; } = null;
 
-        protected TextureComponent() {}
+        protected TextureComponent() { }
 
         public TextureComponent(ITexture texture) {
-            Texture = texture;
+            Texture = texture ?? throw new ArgumentNullException(nameof(texture));
         }
 
         public static TextureComponent FromCollection(int collection, int id) {

@@ -13,7 +13,7 @@ namespace S4_UIEngine.UI.Components {
             get {
                 Tribe c = UIEngine.GS.GetCurrentTribe();
                 if (!textures.TryGetValue(c, out ITexture? o)) {
-                    o = textures[Tribe.DEFAULT];
+                    o = textures[Tribe.Default];
                 }
 
                 return o;
