@@ -1,0 +1,25 @@
+﻿namespace S4UIEngine.S4.Types {
+    public enum Event {
+        MouseMove = 5,
+        LMouseDown = 7,
+        LMouseUp = 8,
+        RMouseDown = 9,
+        RMouseUp = 10,
+        InputEvent = 11,
+        OnChar = 13,
+        MouseWheel = 14,
+        Clock = 21,
+        Music = 32,
+        StopBuilding = 401,
+        StartDestroyBuildingDialog = 404,
+        StartBuilding = 437,
+        FindUnit = 441,
+        FillSelectedTowerWithUnit = 443,
+        SelectedBuildingActionEvent = 444,
+        RecruitSpecialUnit = 481,
+        EntityClicked = 608,
+        ShowTimeDisplayEvent = 627,
+        HideTimeDisplayEvent = 628,
+        ChatClickEvent = 6001,
+    }
+}

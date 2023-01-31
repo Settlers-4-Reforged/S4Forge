@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S4_UIEngine.UI {
+namespace S4UIEngine.UI {
     /// <summary>
     /// Immediate Mode Context Provider
     /// </summary>

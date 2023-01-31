@@ -1,11 +1,11 @@
-﻿using S4_UIEngine.UI.Elements.Grouping;
-using S4_UIEngine.UI.Elements.Grouping.Display;
-using S4_UIEngine.UI.Elements.Interaction;
-using S4_UIEngine.UI.Elements.Static;
-using S4_UIEngine.UPlay;
+﻿using S4UIEngine.UI.Elements.Grouping;
+using S4UIEngine.UI.Elements.Grouping.Display;
+using S4UIEngine.UI.Elements.Interaction;
+using S4UIEngine.UI.Elements.Static;
+using S4UIEngine.UPlay;
 using System.Numerics;
 
-namespace S4_UIEngine.S4.Menus.Multiplayer {
+namespace S4UIEngine.S4.Menus.Multiplayer {
     // Multiplayer Lobby related fixes/additions
     internal class Lobby {
         private static readonly UIWindow inviteWindow = UIWindow.Create(); //TODO: add texture

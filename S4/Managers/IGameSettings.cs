@@ -1,6 +1,6 @@
-﻿using S4_UIEngine.GameTypes;
+﻿using S4UIEngine.S4.Types;
 
-namespace S4_UIEngine.S4.Managers {
+namespace S4UIEngine.S4.Managers {
     public interface IGameSettings {
         public string GetLanguage();
 

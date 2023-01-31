@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace S4_UIEngine.UI.Elements.Grouping {
+namespace S4UIEngine.UI.Elements.Grouping {
     public class UIGroup : UIElement {
         public List<UIElement> Elements { get; set; }
 
-        public bool ClipContent = false;
+        public bool ClipContent { get; set; } = false;
 
         public UIGroup() {
             Elements ??= new List<UIElement>();

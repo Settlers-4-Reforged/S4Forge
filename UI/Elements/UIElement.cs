@@ -1,9 +1,9 @@
-﻿using S4_UIEngine.Rendering;
-using S4_UIEngine.UI.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
+using S4UIEngine.Rendering;
+using S4UIEngine.UI.Components;
 
-namespace S4_UIEngine.UI.Elements {
+namespace S4UIEngine.UI.Elements {
     public abstract class UIElement {
         public Vector2 Size { get; set; }
         public Vector2 Position { get; set; }

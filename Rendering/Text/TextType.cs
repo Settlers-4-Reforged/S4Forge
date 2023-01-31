@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S4_UIEngine.Rendering.Text {
+namespace S4UIEngine.Rendering.Text {
     public enum TextType {
         Normal,
         Bold,

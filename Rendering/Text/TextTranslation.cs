@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using S4_UIEngine;
+using S4UIEngine;
 
 namespace S4HD_Manager.UI {
 	public class TextTranslation {

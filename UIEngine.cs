@@ -1,8 +1,8 @@
-﻿using S4_UIEngine.Rendering;
-using S4_UIEngine.S4.Managers;
+﻿using S4UIEngine.Rendering;
+using S4UIEngine.S4.Managers;
 using System;
 
-namespace S4_UIEngine {
+namespace S4UIEngine {
     public static class UIEngine {
         private static IInputManager? inputManager;
         private static IGameSettings? gameSettings;

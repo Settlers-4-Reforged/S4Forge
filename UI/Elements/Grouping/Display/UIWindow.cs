@@ -1,7 +1,7 @@
-﻿using S4_UIEngine.UI.Components;
+﻿using S4UIEngine.UI.Components;
 using System.Collections.Generic;
 
-namespace S4_UIEngine.UI.Elements.Grouping.Display {
+namespace S4UIEngine.UI.Elements.Grouping.Display {
     internal class UIWindow : UIDisplay<UIWindow> {
 
         public override bool PositionAbsolute => true;

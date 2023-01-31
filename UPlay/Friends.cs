@@ -1,13 +1,14 @@
-﻿using S4_UIEngine.Native;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using S4UIEngine.Native;
+
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 // ReSharper disable MemberCanBePrivate.Local
 #pragma warning disable CS8500
 
-namespace S4_UIEngine.UPlay {
+namespace S4UIEngine.UPlay {
     public static class Friends {
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct UPlayFriend {

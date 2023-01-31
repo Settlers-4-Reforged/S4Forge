@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S4_UIEngine.Rendering.Text {
+namespace S4UIEngine.Rendering.Text {
     public interface ITextRenderer {
         /// <summary>
         /// Renders text at the given position and clips around size, when given.

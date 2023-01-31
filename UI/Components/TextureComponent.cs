@@ -1,9 +1,9 @@
-﻿using S4_UIEngine.GameTypes;
-using S4_UIEngine.Rendering.Texture;
+﻿using S4UIEngine.Rendering.Texture;
+using S4UIEngine.S4.Types;
 using System;
 using System.Numerics;
 
-namespace S4_UIEngine.UI.Components {
+namespace S4UIEngine.UI.Components {
     public class TextureComponent : IUIComponent {
         public virtual ITexture Texture { get; set; }
         public Vector2 Offset { get; set; } = Vector2.Zero;

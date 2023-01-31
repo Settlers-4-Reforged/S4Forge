@@ -1,14 +1,10 @@
-﻿using System;
+﻿using S4UIEngine.Rendering.Texture;
+using S4UIEngine.UI.Components;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using S4_UIEngine.Rendering.Texture;
-using S4_UIEngine.UI.Components;
-using S4HD_Manager.UI;
 
-namespace S4_UIEngine.UI.Elements.Interaction {
+namespace S4UIEngine.UI.Elements.Interaction {
     public class S4Button : UIElement {
         public static ITexture? DefaultButtonTexture, DefaultButtonHeldTexture;
         public ITexture? ButtonTexture, ButtonHeldTexture;
@@ -27,8 +23,8 @@ namespace S4_UIEngine.UI.Elements.Interaction {
         private State state = State.Up;
 
         public void DefaultTextures() {
-            ButtonTexture ??= DefaultButtonTexture ??= TextureCollectionManager.Get(0,0);
-            ButtonHeldTexture ??= DefaultButtonHeldTexture ??= TextureCollectionManager.Get(0,0);
+            ButtonTexture ??= DefaultButtonTexture ??= TextureCollectionManager.Get(0, 0);
+            ButtonHeldTexture ??= DefaultButtonHeldTexture ??= TextureCollectionManager.Get(0, 0);
         }
 
         public S4Button() {

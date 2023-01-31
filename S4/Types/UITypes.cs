@@ -1,26 +1,6 @@
-﻿namespace S4_UIEngine.GameTypes {
-    public enum Team {
-        Red = 0,
-        Blue,
-        Green,
-        Yellow,
-        Purple,
-        Orange,
-        Cyan,
-        White,
-        Max,
-    }
+﻿namespace S4UIEngine.S4.Types {
 
-    public enum Tribe {
-        Roman = 0,
-        Viking,
-        Maya,
-        Dark,
-        Trojan,
-        Default,
-    }
-
-    public enum GuiScreen {
+    public enum UIScreen {
         Unknown = 0,
 
         MainMenu = 1,
@@ -64,10 +44,10 @@
         Max
     }
 
-    public enum GuiMenu {
+    public enum UIMenu {
         S4GuiUnknown = 0,
 
-        ExtrasSave = GuiScreen.Max,
+        ExtrasSave = UIScreen.Max,
         ExtrasMission,
         ExtrasChatSettings,
         ExtrasQuit,

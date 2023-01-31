@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace S4_UIEngine.Rendering.Texture {
+namespace S4UIEngine.Rendering.Texture {
     public static class TextureCollectionManager {
         private static readonly Dictionary<int, ITextureCollection> collections = new Dictionary<int, ITextureCollection>();
 

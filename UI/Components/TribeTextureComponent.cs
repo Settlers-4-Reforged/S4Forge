@@ -1,12 +1,8 @@
-﻿using System;
+﻿using S4UIEngine.Rendering.Texture;
+using S4UIEngine.S4.Types;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using S4_UIEngine.GameTypes;
-using S4_UIEngine.Rendering.Texture;
 
-namespace S4_UIEngine.UI.Components {
+namespace S4UIEngine.UI.Components {
     // Changes based on current tribe - defaults to DEFAULT if a tribe is not specified
     public class TribeTextureComponent : TextureComponent {
         public override ITexture Texture {
