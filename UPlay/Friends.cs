@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using S4UIEngine.Native;
+using S4UI.Native;
 
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 // ReSharper disable MemberCanBePrivate.Local
 #pragma warning disable CS8500
 
-namespace S4UIEngine.UPlay {
+namespace S4UI.UPlay {
     public static class Friends {
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct UPlayFriend {

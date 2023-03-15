@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace S4UIEngine.Rendering {
+namespace S4UI.Rendering {
     [Flags]
     public enum Effects {
         None = 2 ^ 0,

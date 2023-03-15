@@ -1,13 +1,14 @@
-﻿using S4UIEngine.S4.Types;
-using S4UIEngine.UI.Components;
-using S4UIEngine.UI.Elements;
-using S4UIEngine.UI.Elements.Grouping;
-using S4UIEngine.UI.Elements.Grouping.Display;
+﻿using S4UI.S4.Types;
+using S4UI.UI.Components;
+using S4UI.UI.Elements;
+using S4UI.UI.Elements.Grouping;
+using S4UI.UI.Elements.Grouping.Display;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace S4UIEngine.UI {
+namespace S4UI.UI {
     public static class SceneManager {
         private static readonly RootNode rootSceneNode = new RootNode();
 
@@ -25,11 +26,13 @@ namespace S4UIEngine.UI {
 
         static void DoFrame() {
             SceneGraphState baseState = SceneGraphState.Default();
+
+            RenderGroup(rootSceneNode, baseState);
         }
 
-        static void RenderComponents(UIElement parent, SceneGraphState? state) {
+        static void RenderComponents(UIElement parent, SceneGraphState state) {
             foreach (IUIComponent component in parent.Components) {
-                UIEngine.R.RenderUIComponent(component, parent);
+                UIEngine.R.RenderUIComponent(component, parent, state);
             }
         }
 
@@ -38,54 +41,12 @@ namespace S4UIEngine.UI {
 
             RenderComponents(group, newState);
 
-            foreach (UIElement el in group.Elements) {
+            foreach (UIElement el in group.GetSortedElements()) {
                 if (el is UIGroup g) {
                     RenderGroup(g, newState);
                 } else {
                     RenderComponents(el, newState);
                 }
-            }
-        }
-
-        public struct SceneGraphState {
-            public Vector2 CurrentPosition { get; private set; }
-            public Vector2 CurrentScale { get; private set; } //Unused ATM
-            public Vector4 ClippingRect { get; private set; }
-
-            public int Depth { get; private set; }
-
-            public SceneGraphState(Vector2 currentPosition, Vector2 currentScale, Vector4 clippingRect, int depth) {
-                CurrentPosition = currentPosition;
-                CurrentScale = currentScale;
-                ClippingRect = clippingRect;
-                Depth = depth;
-            }
-            public SceneGraphState Clone() {
-                return new SceneGraphState(CurrentPosition, CurrentScale, ClippingRect, Depth);
-            }
-
-            public SceneGraphState ApplyGroup(UIGroup group) {
-                SceneGraphState next = this.Clone();
-
-                next.Depth++;
-
-                if (group.PositionAbsolute) {
-                    next.CurrentPosition = group.Position;
-                } else {
-                    next.CurrentPosition += group.Position;
-                }
-
-                if (group.ClipContent) {
-                    next.ClippingRect = new Vector4(group.Position, group.Size.X, group.Size.Y);
-                }
-
-                return next;
-            }
-
-            public static SceneGraphState Default() {
-                Vector2 screenSize = UIEngine.R.GetScreenSize();
-
-                return new SceneGraphState(Vector2.Zero, Vector2.One, new Vector4(0, 0, screenSize.X, screenSize.Y), 0);
             }
         }
 
@@ -108,6 +69,51 @@ namespace S4UIEngine.UI {
 
                 return elements;
             }
+        }
+    }
+
+    public struct SceneGraphState {
+        public Vector2 CurrentPosition { get; private set; }
+        public Vector2 CurrentScale { get; private set; } //Unused ATM
+        public Vector4 ClippingRect { get; private set; }
+
+        public int Depth { get; private set; }
+
+        public bool DebugActive { get; private set; }
+
+        public SceneGraphState(Vector2 currentPosition, Vector2 currentScale, Vector4 clippingRect, int depth) {
+            CurrentPosition = currentPosition;
+            CurrentScale = currentScale;
+            ClippingRect = clippingRect;
+            Depth = depth;
+            DebugActive = false;
+        }
+        public SceneGraphState Clone() {
+            return new SceneGraphState(CurrentPosition, CurrentScale, ClippingRect, Depth) { DebugActive = this.DebugActive };
+        }
+
+        public SceneGraphState ApplyGroup(UIGroup group) {
+            SceneGraphState next = this.Clone();
+
+            next.Depth++;
+
+            if (group.PositionAbsolute) {
+                next.CurrentPosition = group.Position;
+            } else {
+                next.CurrentPosition += group.Position;
+            }
+
+            if (group.ClipContent) {
+                next.ClippingRect = new Vector4(group.Position, group.Size.X, group.Size.Y);
+            }
+
+            return next;
+        }
+
+        public static SceneGraphState Default() {
+            Vector2 screenSize = UIEngine.R.GetScreenSize();
+
+            return new SceneGraphState(Vector2.Zero, Vector2.One, new Vector4(0, 0, screenSize.X, screenSize.Y), 0);
         }
     }
 }

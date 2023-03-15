@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
-namespace S4UIEngine.UI.Elements.Grouping {
+namespace S4UI.UI.Elements.Grouping {
     public class UIGroup : UIElement {
         public List<UIElement> Elements { get; set; }
 
@@ -8,6 +9,10 @@ namespace S4UIEngine.UI.Elements.Grouping {
 
         public UIGroup() {
             Elements ??= new List<UIElement>();
+        }
+
+        public IEnumerable<UIElement> GetSortedElements() {
+            return Elements.OrderBy(element => element.ZIndex);
         }
     }
 }

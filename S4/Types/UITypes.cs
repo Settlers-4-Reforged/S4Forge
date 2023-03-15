@@ -1,4 +1,4 @@
-﻿namespace S4UIEngine.S4.Types {
+﻿namespace S4UI.S4.Types {
 
     public enum UIScreen {
         Unknown = 0,

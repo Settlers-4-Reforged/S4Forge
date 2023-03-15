@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
-namespace S4UIEngine.Rendering.Text {
+namespace S4UI.Rendering.Text {
     public interface ITextRenderer {
         /// <summary>
         /// Renders text at the given position and clips around size, when given.
@@ -27,7 +22,7 @@ namespace S4UIEngine.Rendering.Text {
         /// <param name="size">Clipping rect parameters</param>
         void RenderTextScaled(string text, Vector2 position, Vector2 size);
 
-#region State
+        #region State
         void SetTextSize(TextSize size);
         void SetTextType(TextType type);
         void SetTextAlignment(TextAlignment alignment);
@@ -57,6 +52,6 @@ namespace S4UIEngine.Rendering.Text {
         /// Loads the saved state into the current renderer context
         /// </summary>
         void LoadStateContext(int id);
-#endregion
+        #endregion
     }
 }

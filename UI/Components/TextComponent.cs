@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace S4UIEngine.UI.Components {
+namespace S4UI.UI.Components {
     public class TextComponent : IUIComponent {
         public Vector2 Offset { get; set; }
         public string Text { get; set; }

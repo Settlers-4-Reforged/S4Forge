@@ -1,8 +1,8 @@
-﻿using S4UIEngine.Rendering.Texture;
-using S4UIEngine.S4.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using S4UI.Rendering.Texture;
+using S4UI.S4.Types;
 
-namespace S4UIEngine.UI.Components {
+namespace S4UI.UI.Components {
     // Changes based on current tribe - defaults to DEFAULT if a tribe is not specified
     public class TribeTextureComponent : TextureComponent {
         public override ITexture Texture {

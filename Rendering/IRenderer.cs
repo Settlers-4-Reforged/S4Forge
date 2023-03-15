@@ -1,15 +1,12 @@
-﻿using S4UIEngine.Rendering.Text;
-using S4UIEngine.Rendering.Texture;
-using S4UIEngine.UI.Components;
-using S4UIEngine.UI.Elements;
+﻿using S4UI.UI;
+using S4UI.UI.Components;
+using S4UI.UI.Elements;
 using System.Numerics;
 
-namespace S4UIEngine.Rendering {
+namespace S4UI.Rendering {
     public interface IRenderer {
-        void RenderUIComponent(IUIComponent component, UIElement parent);
-        void RenderTeamTexture(ITexture texture, Vector2 position, Vector2 size);
+        void RenderUIComponent(IUIComponent component, UIElement parent, SceneGraphState sceneGraphState);
 
-        ITextRenderer GetTextRenderer();
 
         Vector2 GetScreenSize();
     }

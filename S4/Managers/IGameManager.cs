@@ -1,20 +1,21 @@
-﻿using S4UIEngine.S4.Types;
-using System;
+﻿using S4UI.S4.Types;
 using System.Collections.Generic;
 
-namespace S4UIEngine.S4.Managers {
+namespace S4UI.S4.Managers {
     public interface IGameManager {
-        public delegate void ScreenCallback(UIScreen previous, UIScreen next);
-        public delegate void MenuCallback(List<UIMenu> previous, List<UIMenu> next);
-        public delegate void EventCallback(EventCallbackParameters param);
+        delegate void ScreenCallback(UIScreen previous, UIScreen next);
+        delegate void MenuCallback(List<UIMenu> previous, List<UIMenu> next);
+        delegate void EventCallback(EventCallbackParameters param);
 
-        public Action<UIScreen/*previous*/, UIScreen/*new*/> OnS4ScreenChange { get; set; }
-        public Action<List<UIMenu>/*previous*/, List<UIMenu>/*new*/> OnS4MenuChange { get; set; }
+        //public Action<UIScreen/*previous*/, UIScreen/*new*/> OnS4ScreenChange { get; set; }
+        //public Action<List<UIMenu>/*previous*/, List<UIMenu>/*new*/> OnS4MenuChange { get; set; }
 
+        UIScreen[] GetScreens();
+        UIMenu[] GetMenus();
 
-        public bool RegisterS4ScreenChangeCallback(ScreenCallback callback);
-        public bool RegisterS4MenuChangeCallback(MenuCallback callback);
-        public bool RegisterEventCallback(Event eventId, EventCallback callback);
+        bool RegisterS4ScreenChangeCallback(ScreenCallback callback);
+        bool RegisterS4MenuChangeCallback(MenuCallback callback);
+        bool RegisterEventCallback(Event eventId, EventCallback callback);
     }
 
     public struct EventCallbackParameters {

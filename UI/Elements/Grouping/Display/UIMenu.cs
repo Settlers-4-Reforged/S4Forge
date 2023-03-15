@@ -1,4 +1,4 @@
-﻿namespace S4UIEngine.UI.Elements.Grouping.Display {
+﻿namespace S4UI.UI.Elements.Grouping.Display {
     internal class UIMenu : UIDisplay<UIMenu> {
 
         public UIMenu() {

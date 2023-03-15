@@ -1,17 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net48</TargetFrameworks>
-    <RootNamespace>S4UIEngine</RootNamespace>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <RootNamespace>S4UI</RootNamespace>
     <Nullable>enable</Nullable>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>x86</Platforms>
 	<LangVersion>8.0</LangVersion>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|x86'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|x86'">
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove=".git" />
     <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="S4\Menus\Settings\" />
   </ItemGroup>
 
 </Project>

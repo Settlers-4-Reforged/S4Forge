@@ -1,6 +1,6 @@
-﻿using S4UIEngine.Rendering.Texture;
+﻿using S4UI.Rendering.Texture;
 
-namespace S4UIEngine.UI.Components {
+namespace S4UI.UI.Components {
     public class NineSliceTextureComponent : TextureComponent {
         //Slices:
         private float top, bottom, left, right;

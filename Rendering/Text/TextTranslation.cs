@@ -1,34 +1,30 @@
-﻿using System;
+﻿using S4UI;
+
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using S4UIEngine;
 
-namespace S4HD_Manager.UI {
-	public class TextTranslation {
-		protected static string setLanguage;
-		static TextTranslation() {
-			setLanguage = UIEngine.GS.GetLanguage();
-		}
+namespace S4UI.Rendering.Text {
+    public class TextTranslation {
+        protected static string setLanguage;
+        static TextTranslation() {
+            setLanguage = UIEngine.GS.GetLanguage();
+        }
 
-		public Dictionary<string, string> textTranslations;
+        public Dictionary<string, string> textTranslations;
 
-		public TextTranslation(params (string lang, string text)[] translations) {
-			textTranslations = new Dictionary<string, string>();
+        public TextTranslation(params (string lang, string text)[] translations) {
+            textTranslations = new Dictionary<string, string>();
 
-			foreach(var t in translations) {
-				textTranslations.Add(t.lang, t.text);
-			}
-		}
+            foreach (var t in translations) {
+                textTranslations.Add(t.lang, t.text);
+            }
+        }
 
-		public static implicit operator string(TextTranslation t) {
-			return t.ToString();
-		}
+        public static implicit operator string(TextTranslation t) {
+            return t.ToString();
+        }
 
-		public override string ToString() {
-			return !textTranslations.TryGetValue(setLanguage, out string? output) ? textTranslations["en"] : output;
-		}
-	}
+        public override string ToString() {
+            return !textTranslations.TryGetValue(setLanguage, out string? output) ? textTranslations["en"] : output;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace S4UIEngine.UI.Elements.Grouping {
+namespace S4UI.UI.Elements.Grouping {
     internal class UIRows : UIGroup {
         private readonly float rowHeight;
         private readonly int rows;
