@@ -1,4 +1,4 @@
-﻿namespace S4UI.S4.Types {
+﻿namespace Forge.S4.Types {
     public enum Event {
         MouseMove = 5,
         LMouseDown = 7,

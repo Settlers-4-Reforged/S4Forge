@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace S4UI.Native {
+namespace Forge.UX.Native {
     internal static class Kernel32 {
         [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
         internal static extern IntPtr GetProcAddress(IntPtr/*HMODULE*/ hModule, string procName);

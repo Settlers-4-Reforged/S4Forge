@@ -1,5 +1,4 @@
-﻿namespace S4UI.S4.Types {
-
+﻿namespace Forge.S4.Types {
     public enum UIScreen {
         Unknown = 0,
 
