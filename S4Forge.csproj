@@ -4,44 +4,70 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RootNamespace>Forge</RootNamespace>
     <Nullable>enable</Nullable>
-	<PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <BaseOutputPath>$(SolutionDir)BUILD\Forge</BaseOutputPath>
-	<TargetExt>.nasi</TargetExt>
+    <TargetExt>.nasi</TargetExt>
     <SignAssembly>False</SignAssembly>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>S4Forge</Title>
-    <Authors>WizzardMaker</Authors>
-    <PackageProjectUrl>https://gitlab.settlers4-hd.com/s4-plugins/modapi/s4-forge</PackageProjectUrl>
-    <RepositoryUrl>https://gitlab.settlers4-hd.com/s4-plugins/modapi/s4-forge</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
-    <FileVersion>$(AssemblyVersion)</FileVersion>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|x86'">
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|x86'">
+  <PropertyGroup>
+    <!--NuGet Package settings:-->
+    <Title>S4Forge</Title>
+    <Authors>WizzardMaker</Authors>
+    <Description>
+      S4Forge - Modding Framework for Settlers 4
+    </Description>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageOutputPath>$(SolutionDir)BUILD\NuGet\</PackageOutputPath>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <!--
+      GeneratePackageOnBuild should stay false, because we have to manually add the nasi file
+      after build and NuGet thinks is smart and includes non build files *before* the build finished...
+    -->
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove=".git" />
     <None Remove=".gitignore" />
+
+    <!--NuGet Files:-->
+    <Content Include="$(SolutionDir)BUILD\Forge\$(Configuration)\*.nasi">
+      <Pack>true</Pack>
+      <PackagePath>lib/netstandard2.0</PackagePath>
+    </Content>
+    <Content Include="NuGet/S4Forge.targets">
+      <Pack>true</Pack>
+      <PackagePath>build/</PackagePath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj" />
-  </ItemGroup>
-
+  <Choose>
+    <When Condition="'$(SolutionName)'=='Forge'">
+      <ItemGroup>
+        <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="S4APIWrapper" Version="*">
+        </PackageReference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 </Project>
