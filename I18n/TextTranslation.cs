@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Forge.I18n {
     public class TextTranslation {
-        protected static string setLanguage => GameConfig.GetLanguage();
+        protected static string gameLanguage => GameConfig.GetLanguage();
 
         public Dictionary<string, string> textTranslations;
 
@@ -26,7 +26,7 @@ namespace Forge.I18n {
         }
 
         public override string ToString() {
-            return !textTranslations.TryGetValue(setLanguage, out string output) ? textTranslations["en"] : output;
+            return !textTranslations.TryGetValue(gameLanguage, out string output) ? textTranslations["en"] : output;
         }
     }
 }
