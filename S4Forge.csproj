@@ -46,10 +46,12 @@
     <Content Include="$(SolutionDir)BUILD\Forge\$(Configuration)\*.nasi">
       <Pack>true</Pack>
       <PackagePath>lib/netstandard2.0</PackagePath>
+      <Visible>false</Visible>
     </Content>
     <Content Include="NuGet/S4Forge.targets">
       <Pack>true</Pack>
       <PackagePath>build/</PackagePath>
+	  <Visible>false</Visible>
     </Content>
   </ItemGroup>
 
@@ -58,14 +60,17 @@
   </ItemGroup>
 
   <Choose>
-    <When Condition="'$(SolutionName)'=='Forge'">
+    <When Condition="'$(SolutionName)'=='S4ModdingFramework'">
       <ItemGroup>
-        <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj" />
+        <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj">
+	        <HintPath>S4APIWrapper.asi</HintPath>
+		</ProjectReference>
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
         <PackageReference Include="S4APIWrapper" Version="*">
+	        <HintPath>S4APIWrapper.asi</HintPath>
         </PackageReference>
       </ItemGroup>
     </Otherwise>
