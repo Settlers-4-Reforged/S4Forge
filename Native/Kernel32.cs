@@ -8,5 +8,8 @@ namespace Forge.UX.Native {
 
         [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
         internal static extern IntPtr/*HMODULE*/ LoadLibrary([MarshalAs(UnmanagedType.LPStr)] string lpFileName);
+
+        [DllImport("kernel32.dll")]
+        public static extern int GetModuleHandleA(IntPtr name);
     }
 }
