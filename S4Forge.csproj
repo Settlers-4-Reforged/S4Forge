@@ -5,7 +5,7 @@
     <RootNamespace>Forge</RootNamespace>
     <Nullable>enable</Nullable>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <BaseOutputPath>$(SolutionDir)BUILD\Forge</BaseOutputPath>
@@ -41,6 +41,15 @@
   <ItemGroup>
     <None Remove=".git" />
     <None Remove=".gitignore" />
+    <None Remove="Lib\Microsoft.DirectX.AudioVideoPlayback.dll" />
+    <None Remove="Lib\Microsoft.DirectX.Diagnostics.dll" />
+    <None Remove="Lib\Microsoft.DirectX.Direct3D.dll" />
+    <None Remove="Lib\Microsoft.DirectX.Direct3DX.dll" />
+    <None Remove="Lib\Microsoft.DirectX.DirectDraw.dll" />
+    <None Remove="Lib\Microsoft.DirectX.DirectInput.dll" />
+    <None Remove="Lib\Microsoft.DirectX.DirectPlay.dll" />
+    <None Remove="Lib\Microsoft.DirectX.DirectSound.dll" />
+    <None Remove="Lib\Microsoft.DirectX.dll" />
 
     <!--NuGet Files:-->
     <Content Include="$(SolutionDir)BUILD\Forge\$(Configuration)\*.nasi">
@@ -48,6 +57,9 @@
       <PackagePath>lib/netstandard2.0</PackagePath>
       <Visible>false</Visible>
     </Content>
+    <Compile Remove="BUILD\**" />
+    <EmbeddedResource Remove="BUILD\**" />
+    <None Remove="BUILD\**" />
     <Content Include="NuGet/S4Forge.targets">
       <Pack>true</Pack>
       <PackagePath>build/</PackagePath>
@@ -56,7 +68,37 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.AudioVideoPlayback.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.Diagnostics.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.Direct3D.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.Direct3DX.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectDraw.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectInput.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectPlay.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectSound.dll" />
+    <EmbeddedResource Include="Lib\Microsoft.DirectX.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX">
+      <HintPath>Lib\Microsoft.DirectX.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D">
+      <HintPath>Lib\Microsoft.DirectX.Direct3D.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3DX">
+      <HintPath>Lib\Microsoft.DirectX.Direct3DX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectDraw">
+      <HintPath>Lib\Microsoft.DirectX.DirectDraw.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 
   <Choose>

@@ -1,14 +1,22 @@
 ﻿using Forge.Engine;
+using Forge.Native;
 
 using NetModAPI;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace Forge {
     public class S4Forge : IPlugin {
         public void Initialize() {
+            AddLegacyShims();
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+
             IEnumerable<IEngine> engines = ModuleLoader.CreateAvailableEngines();
 
             foreach (IEngine engine in engines) {
@@ -16,6 +24,37 @@ namespace Forge {
                 engine.Initialize(this);
                 Logger.LogInfo($"Finished initializing \"{engine.Name}\"...");
             }
+        }
+
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [HandleProcessCorruptedStateExceptions()]
+        private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
+            Logger.LogError("Forge detected an unhandled exception", (Exception)e.ExceptionObject);
+#if DEBUG
+            User32.MessageBox("Forge detected an unhandled exception and is now halting execution.\nEither attach a debugger, or ignore this error", "S4Forge");
+#endif
+        }
+
+        private static void AddLegacyShims() {
+            Logger.LogDebug($"LegacyV2RuntimeEnabled: {RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully}");
+
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
+                // Loading embedded dll:
+                string assemblyName = new AssemblyName(args.Name).Name;
+                string resourceName = assemblyName + ".dll";
+                string resource = Array.Find(typeof(S4Forge).Assembly.GetManifestResourceNames(),
+                    element => element.EndsWith(resourceName));
+                if (resource == null)
+                    return null;
+
+                Logger.LogInfo($"Loading {assemblyName} from Embedded Resources...");
+
+                using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource)!;
+
+                byte[] assemblyData = new byte[stream.Length];
+                stream.Read(assemblyData, 0, assemblyData.Length);
+                return Assembly.Load(assemblyData);
+            };
         }
     }
 }
