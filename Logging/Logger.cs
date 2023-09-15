@@ -41,7 +41,7 @@ namespace Forge.Logging {
             NetLogger.LogDebug($"[{source}]>>" + string.Format(message, args));
         }
 
-        public static void LogError(Exception? err, string? message, params object[] args) {
+        public static void LogError(Exception? err, string message, params object[] args) {
             if (!Enabled)
                 return;
 
