@@ -9,6 +9,14 @@ namespace Forge.S4 {
             S4_Main = Kernel32.GetModuleHandleA(IntPtr.Zero);
         }
 
+        public static IntPtr Hwnd {
+            get {
+                unsafe {
+                    return new IntPtr(ModAPI.API.GetHwnd());
+                }
+            }
+        }
+
         public static int S4_Main { get; private set; }
 
         public static T ReadValue<T>(int address, bool relative = true) where T : unmanaged {
