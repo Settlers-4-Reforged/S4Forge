@@ -1,4 +1,7 @@
-﻿namespace Forge.S4.Types {
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace Forge.S4.Types {
     public enum UIScreen {
         Unknown = 0,
 
@@ -84,4 +87,31 @@
 
         Max // never put anything below this
     };
+
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct S4BltParams {
+        public IntPtr caller;
+        public IntPtr imagePalette;
+        public IntPtr imageData;
+        public int imageWidth;
+        public int imageHeight;
+        public int destX;
+        public int destY;
+        public int destClippingOffsetY;
+        public IntPtr subSurface;
+        public bool imageHighRes;
+        public int destWidth;
+        public int destHeight;
+        public int surfaceWidth;
+        public int surfaceHeight;
+        public int stride;
+        public uint zoomFactor;
+        public IntPtr surface;
+        public bool isFogOfWar;
+        public ushort settlerId;
+        public ushort spriteId;
+        public IntPtr destinationDc;
+    }
+
 }
