@@ -9,7 +9,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <BaseOutputPath>$(SolutionDir)BUILD\Forge</BaseOutputPath>
-    <TargetExt>.nasi</TargetExt>
     <SignAssembly>False</SignAssembly>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
@@ -31,11 +30,7 @@
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
-    <!--
-      GeneratePackageOnBuild should stay false, because we have to manually add the nasi file
-      after build and NuGet thinks is smart and includes non build files *before* the build finished...
-    -->
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -50,21 +45,6 @@
     <None Remove="Lib\Microsoft.DirectX.DirectPlay.dll" />
     <None Remove="Lib\Microsoft.DirectX.DirectSound.dll" />
     <None Remove="Lib\Microsoft.DirectX.dll" />
-
-    <!--NuGet Files:-->
-    <Content Include="$(SolutionDir)BUILD\Forge\$(Configuration)\*.nasi">
-      <Pack>true</Pack>
-      <PackagePath>lib/netstandard2.0</PackagePath>
-      <Visible>false</Visible>
-    </Content>
-    <Compile Remove="BUILD\**" />
-    <EmbeddedResource Remove="BUILD\**" />
-    <None Remove="BUILD\**" />
-    <Content Include="NuGet/S4Forge.targets">
-      <Pack>true</Pack>
-      <PackagePath>build/</PackagePath>
-	  <Visible>false</Visible>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
