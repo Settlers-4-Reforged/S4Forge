@@ -80,10 +80,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Microsoft.DirectX">
       <HintPath>Lib\Microsoft.DirectX.dll</HintPath>
       <Private>False</Private>
