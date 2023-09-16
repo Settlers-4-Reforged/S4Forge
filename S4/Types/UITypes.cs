@@ -88,30 +88,36 @@ namespace Forge.S4.Types {
         Max // never put anything below this
     };
 
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct S4BltParams {
-        public IntPtr caller;
-        public IntPtr imagePalette;
-        public IntPtr imageData;
-        public int imageWidth;
-        public int imageHeight;
-        public int destX;
-        public int destY;
-        public int destClippingOffsetY;
-        public IntPtr subSurface;
-        public bool imageHighRes;
-        public int destWidth;
-        public int destHeight;
-        public int surfaceWidth;
-        public int surfaceHeight;
-        public int stride;
-        public uint zoomFactor;
-        public IntPtr surface;
-        public bool isFogOfWar;
-        public ushort settlerId;
-        public ushort spriteId;
-        public IntPtr destinationDc;
+    public enum UIElementTypes : short {
+        Ignored = 4,
+        PlayerIcon = 6,
+        Map = 9,
+        UIPlayer = 19,
+        TextBox = 20,
+        U4Ignored = 20,
+        MissionText = 21,
     }
 
+    public enum UIElementTextStyle : short {
+        LargeBlue = 0b0000_0000,
+        HeaderCentered = 0b0000_1011,//Above input fields
+        NormalCentered = 0b0000_0011,
+        NormalLeft = 0b0000_1001,
+        BoldCentered = 0b0000_0111,
+        RedCentered = 0b0000_0010,
+        SmallGold = 0b0000_1100,
+        SmallBlue = 0b0000_0100,
+        SmallWhite = 0b0000_1000,
+    }
+
+    [Flags]
+    public enum UIElementEffects : short {
+        None = 0,
+        Pressed = 1,
+        Hover = 2,
+        Disabled = 4,
+        Hidden = 8,
+        TextBoxActive = 64,
+        CursorBlinkOn = 128,
+    };
 }
