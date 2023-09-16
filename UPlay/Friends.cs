@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Forge.UX.Native;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Forge.UX.Native;
 
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 // ReSharper disable MemberCanBePrivate.Local
@@ -14,7 +15,7 @@ namespace Forge.UX.UPlay {
         private struct UPlayFriend {
             public IntPtr accountId;
             public IntPtr name;
-            public int relationship;
+            public UPlayFriendRelationship relationship;
             public int avatarId;
             public Int32 gameSession;
             public bool blacklisted;
@@ -22,6 +23,14 @@ namespace Forge.UX.UPlay {
             public Byte unknown2;
             public Byte unknown3;
             public IntPtr nickname;
+        }
+
+        private enum UPlayFriendRelationship {
+            None = 0,
+            Friends = 1,
+            RequestSent = 2,
+            RequestReceived = 3,
+            Unknown
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
