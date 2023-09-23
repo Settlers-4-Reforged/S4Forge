@@ -1,4 +1,5 @@
-﻿using Forge.Engine;
+﻿using Forge.Config;
+using Forge.Engine;
 using Forge.Native;
 
 using NetModAPI;
@@ -17,7 +18,9 @@ using NetLogger = NetModAPI.Logger;
 namespace Forge {
     public class S4Forge : IForge {
         public void Initialize() {
-            AddLegacyShims();
+            AssemblyInitializations.InitAssemblyLoadHandler();
+            AssemblyInitializations.AddLegacyShims();
+
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
 
             IEnumerable<IEngine> engines = ModuleLoader.CreateAvailableEngines();
@@ -47,26 +50,5 @@ namespace Forge {
 #endif
         }
 
-        private static void AddLegacyShims() {
-            Logger.LogDebug($"LegacyV2RuntimeEnabled: {RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully}");
-
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
-                // Loading embedded dll:
-                string assemblyName = new AssemblyName(args.Name).Name;
-                string resourceName = assemblyName + ".dll";
-                string resource = Array.Find(typeof(S4Forge).Assembly.GetManifestResourceNames(),
-                    element => element.EndsWith(resourceName));
-                if (resource == null)
-                    return null;
-
-                Logger.LogInfo($"Loading {assemblyName} from Embedded Resources...");
-
-                using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource)!;
-
-                byte[] assemblyData = new byte[stream.Length];
-                stream.Read(assemblyData, 0, assemblyData.Length);
-                return Assembly.Load(assemblyData);
-            };
-        }
     }
 }

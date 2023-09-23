@@ -1,4 +1,5 @@
-﻿using Forge.Logging;
+﻿using Forge.Config;
+using Forge.Logging;
 
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace Forge.Engine {
                     Logger.LogInfo(msg);
 
                     Assembly pluginAssembly = Assembly.LoadFrom(file);
+
+                    AssemblyInitializations.AddAssemblyLoadSource(pluginAssembly);
 
                     var types = new List<Type>(pluginAssembly.GetTypes());
 

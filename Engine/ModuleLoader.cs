@@ -1,4 +1,6 @@
-﻿using NetModAPI;
+﻿using Forge.Config;
+
+using NetModAPI;
 
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,9 @@ namespace Forge.Engine {
             foreach (string engine in Engines) {
                 try {
                     Assembly engineAssembly = Assembly.LoadFile(Environment.CurrentDirectory + EnginePath + engine);
+
+                    AssemblyInitializations.AddAssemblyLoadSource(engineAssembly);
+
                     Type? iEngine = GetIEngine(engineAssembly);
                     if (iEngine == null) {
                         throw new EntryPointNotFoundException($"Failed to find IEngine in engine \"{engine}\"");
