@@ -1,18 +1,10 @@
-﻿using Forge.Logging;
-using Forge.S4;
-using Forge.UX.Native;
-
-using Microsoft.DirectX.Direct3D;
-using Microsoft.DirectX.DirectDraw;
+﻿using Forge.S4;
 
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
 
 using DirectDraw7 = Microsoft.DirectX.DirectDraw.Device;
 using DirectDrawSurface7 = Microsoft.DirectX.DirectDraw.Surface;
