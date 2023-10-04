@@ -8,10 +8,11 @@ using System.Reflection;
 using System.Text;
 
 namespace Forge.Config {
-    internal static class AssemblyInitializations {
+    public static class AssemblyInitializations {
         private static List<Assembly> assemblies = new List<Assembly>();
+        private static List<string> folders = new List<string>();
 
-        public static void AddLegacyShims() {
+        internal static void AddLegacyShims() {
             //Access to LegacyV2RuntimeEnabledSuccessfully triggers the static constructor of RuntimePolicyHelper - thus enabling the legacy runtime.
             Logger.LogDebug($"LegacyV2RuntimeEnabled: {RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully}");
         }
@@ -20,7 +21,15 @@ namespace Forge.Config {
             assemblies.Add(assembly);
         }
 
-        public static void InitAssemblyLoadHandler() {
+        public static void AddFolderLoadSource(string path) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            AppDomain.CurrentDomain.AppendPrivatePath(path);
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        internal static void InitAssemblyLoadHandler() {
+            folders.AddRange(new[] { @"plugins/", "plugins/Forge/Lib", "plugins/Forge/Engines", "plugins/Forge/Plugins" });
+
             assemblies = new List<Assembly> { Assembly.GetExecutingAssembly() };
 
             AppDomain.CurrentDomain.AssemblyResolve += static (sender, args) => {
@@ -46,6 +55,21 @@ namespace Forge.Config {
                     }
                     return Assembly.Load(assemblyData);
                 }
+
+                List<string> searchedFolders = new List<string>();
+                foreach (string folder in folders) {
+                    string path = Path.Combine(Environment.CurrentDirectory, folder, assemblyName + ".dll");
+
+                    searchedFolders.Add(path);
+                    if (!File.Exists(path))
+                        continue;
+
+                    Logger.LogInfo($"Loading {assemblyName} from {path}...");
+
+                    return Assembly.LoadFrom(path);
+                }
+
+                Logger.LogError(null, $"Failed to find assembly {assemblyName} in any of the following folders:\n{string.Join("\n", searchedFolders)}");
 
                 return null;
             };
