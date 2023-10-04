@@ -21,7 +21,7 @@ namespace Forge.Engine {
         }
 
         private static readonly string[] Engines = new string[] { "UX-Engine.dll", "Plugin-Engine.dll" };
-        private const string EnginePath = "\\plugins\\";
+        private const string EnginePath = @"\plugins\Forge\Engines\";
 
         public static IEnumerable<IEngine> CreateAvailableEngines() {
             List<IEngine> engines = new List<IEngine>();

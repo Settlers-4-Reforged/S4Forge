@@ -16,6 +16,21 @@ To use a Forge Engine, add a reference to the corresponding NuGet package.
 S4Forge and all of its engines are available as a NuGet package from a central GitLab NuGet repository.
 [Read more](https://gitlab.settlers4-hd.com/s4-plugins/modapi/packages/-/blob/main/README.md)
 
+tldr: Add the following to your `NuGet.config` file:
+```xml
+<packageSources>
+	<!-- ... -->
+    <add key="S4 Forge NuGet" value="https://gitlab.settlers4-hd.com/api/v4/projects/21/packages/nuget/index.json" />
+</packageSources>
+```
+
+and add the following to your `.csproj` file:
+```xml
+<ItemGroup>
+	<PackageReference Include="S4Forge" Version="1.0.0" />
+</ItemGroup>
+```
+
 ## How to use
 ### Creating a mod
 To create a mod, create a new .Net Standard 2.0 project and add a reference to S4Forge.
@@ -32,7 +47,8 @@ Modify the `csproj` file to change the extension of the output file to `.nasi`:
 ```
 
 ### Loading a mod
-Forge automatically loads all `.nasi` mods in the `plugins` folder of Settlers 4 based on the priority field specified in their respective `IPlugin` implementations.
+Forge automatically loads all `.nasi` mods in the `plugins\Forge\Plugins` folder of Settlers 4 based on the priority field specified in their respective `IPlugin` implementations.
+Plugins can be loaded from folders inside the `plugins\Forge\Plugins` folder, but only if they are not deeper than 1 folder (e.g. `plugins\Forge\Plugins\MyMod` is fine, but `plugins\Forge\Plugins\MyMod\SubFolder` is not).
 
 #### Using embedded dependencies
 If your mod has dependencies, you can embed them in your mod by adding them as embedded resources.
