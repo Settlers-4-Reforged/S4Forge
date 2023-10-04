@@ -28,5 +28,32 @@ namespace Forge.I18n {
         public override string ToString() {
             return !textTranslations.TryGetValue(gameLanguage, out string output) ? textTranslations["en"] : output;
         }
+
+        public static Dictionary<string, TextTranslation> FromCsv(string path) {
+            Dictionary<string, TextTranslation> translations = new Dictionary<string, TextTranslation>();
+            string[] lines = System.IO.File.ReadAllLines(path);
+
+            // Example Format:
+            // "name;de;en;pl"
+
+            string[] fileLanguages = lines[0].Split(',');
+
+            for (int lineIndex = 1; lineIndex < lines.Length; lineIndex++) {
+                string[] keys = lines[lineIndex].Split(',');
+                if (keys.Length == 0) continue;
+                if (keys[0].StartsWith("#")) continue; // Commented out line (starts with #)
+                if (keys.Length != fileLanguages.Length + 1) throw new Exception($"Invalid CSV Format at line {lineIndex}");
+
+                TextTranslation translation = new TextTranslation();
+                for (int languageIndex = 1; languageIndex < keys.Length; languageIndex++) {
+                    translation.textTranslations.Add(fileLanguages[languageIndex], keys[languageIndex]);
+                }
+
+                string name = keys[0];
+                translations.Add(name, translation);
+            }
+
+            return translations;
+        }
     }
 }
