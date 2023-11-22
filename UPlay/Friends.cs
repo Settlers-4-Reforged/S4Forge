@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 // ReSharper disable MemberCanBePrivate.Local
 #pragma warning disable CS8500
 
-namespace Forge.UX.UPlay {
+namespace Forge.UPlay {
     public static class Friends {
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct UPlayFriend {
@@ -94,7 +94,9 @@ namespace Forge.UX.UPlay {
         public static void InviteFriend(Friend friend) {
             unsafe {
                 var inviteParams = new InviteParameters() { unknownProbablySize = 15 }; //don't ask why
-                UPlayFriendsInviteToGame(Marshal.StringToHGlobalAnsi(friend.AccountId), &inviteParams);
+                IntPtr accountId = Marshal.StringToHGlobalAnsi(friend.AccountId);
+                UPlayFriendsInviteToGame(accountId, &inviteParams);
+                Marshal.FreeHGlobal(accountId);
             }
         }
     }
