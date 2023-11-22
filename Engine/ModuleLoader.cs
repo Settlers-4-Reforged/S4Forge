@@ -1,12 +1,12 @@
-﻿using Forge.Config;
+﻿using DryIoc;
+
+using Forge.Config;
 
 using NetModAPI;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Forge.Engine {
     internal static class ModuleLoader {
@@ -23,8 +23,7 @@ namespace Forge.Engine {
         private static readonly string[] Engines = new string[] { "UX-Engine.dll", "Plugin-Engine.dll" };
         private const string EnginePath = @"\plugins\Forge\Engines\";
 
-        public static IEnumerable<IEngine> CreateAvailableEngines() {
-            List<IEngine> engines = new List<IEngine>();
+        internal static void RegisterAvailableEngines(Container dependencies) {
 
             foreach (string engine in Engines) {
                 try {
@@ -37,14 +36,12 @@ namespace Forge.Engine {
                         throw new EntryPointNotFoundException($"Failed to find IEngine in engine \"{engine}\"");
                     }
 
-                    IEngine engineObject = (IEngine)Activator.CreateInstance(iEngine);
-                    engines.Add(engineObject);
+                    dependencies.RegisterMany(new[] { iEngine }, Reuse.Singleton);
                 } catch (Exception ex) {
                     Logger.LogError($"Failed to load engine \"{engine}\" at \"{Environment.CurrentDirectory + EnginePath}\"", ex);
                 }
             }
 
-            return engines;
         }
     }
 }

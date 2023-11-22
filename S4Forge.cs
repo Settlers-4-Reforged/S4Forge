@@ -1,5 +1,8 @@
-﻿using Forge.Config;
+﻿using DryIoc;
+
+using Forge.Config;
 using Forge.Engine;
+using Forge.Logging;
 using Forge.Native;
 
 using NetModAPI;
@@ -10,28 +13,41 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 
 using Logger = Forge.Logging.Logger;
 using NetLogger = NetModAPI.Logger;
 
 namespace Forge {
     public class S4Forge : IForge {
+
         public void Initialize() {
             AssemblyInitializations.InitAssemblyLoadHandler();
             AssemblyInitializations.AddLegacyShims();
 
+            TaskScheduler.UnobservedTaskException += (s, e) => {
+                Logger.LogError(e.Exception, "An unobserved task exception was thrown");
+            };
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            AppDomain.CurrentDomain.FirstChanceException += (s, e) => {
+                Logger.LogError(e.Exception, "A first chance exception was thrown");
+            };
 
-            IEnumerable<IEngine> engines = ModuleLoader.CreateAvailableEngines();
+            DI.Dependencies.RegisterInstanceMany(this);
+
+            ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
+
+            var engines = DI.Dependencies.ResolveMany<IEngine>();
 
             foreach (IEngine engine in engines) {
                 Logger.LogInfo($"Initializing \"{engine.Name}\"...");
-                engine.Initialize(this);
+                engine.Initialize();
                 Logger.LogInfo($"Finished initializing \"{engine.Name}\"...");
             }
 
-            if (!PluginLoader.LoadAllPlugins()) {
+            if (!PluginLoader.LoadAllPlugins(DI.Dependencies)) {
                 Logger.LogError(null, "There was an error during the loading of a (or all) plugins");
             } else {
                 Logger.LogInfo("Finished loading all plugins");

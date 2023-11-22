@@ -1,4 +1,6 @@
-﻿using Forge.Config;
+﻿using DryIoc;
+
+using Forge.Config;
 using Forge.Logging;
 
 using System;
@@ -6,18 +8,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Forge.Engine {
     internal static class PluginLoader {
         const string PluginExtension = "*.nasi";
 
-        public static bool LoadAllPlugins() {
-            var files = Directory.GetFiles(Environment.CurrentDirectory + "/plugins/", PluginExtension);
+        public static bool LoadAllPlugins(Container dependencies) {
+            var files = Directory.GetFiles(Environment.CurrentDirectory + "/plugins/Forge/Plugins", PluginExtension);
 
             Logger.LogInfo($"Found {files.Length} plugin(s) to load.");
-
-            List<IPlugin> plugins = new List<IPlugin>();
 
             foreach (string file in files) {
                 try {
@@ -30,32 +29,37 @@ namespace Forge.Engine {
 
                     var types = new List<Type>(pluginAssembly.GetTypes());
 
-                    Type? pluginClass = (from Type t in types
-                                         where
-                                             t.GetInterface(nameof(IPlugin)) != null &&
-                                             !t.IsAbstract &&
-                                             !t.IsInterface
-                                         select t).FirstOrDefault();
-                    if (pluginClass == null) {
+                    Type? pluginType = (from Type t in types
+                                        where
+                                            t.GetInterface(nameof(IPlugin)) != null &&
+                                            !t.IsAbstract &&
+                                            !t.IsInterface
+                                        select t).FirstOrDefault();
+                    if (pluginType == null) {
                         Logger.LogError(null, $"Failed to find a valid plugin class in '{file}'");
                         continue;
                     }
-                    Logger.LogInfo($"Found Plugin '{pluginClass.Name}'");
+                    Logger.LogInfo($"Found Plugin '{pluginType.Name}'");
 
-                    IPlugin plugin = (IPlugin)(Activator.CreateInstance(pluginClass));
-                    plugins.Add(plugin);
+                    dependencies.RegisterMany(new[] { pluginType }, Reuse.Singleton);
                 } catch (Exception e) {
                     string stackTrace = e.StackTrace;
                     while (e.InnerException != null) {
                         e = e.InnerException;
                     }
 
-                    string errorMsg =
-                        $"Error during load of Assembly '{file}'\nError: {e.Message}\n\n============= Stack Trace =============\n{stackTrace}";
+                    string errorMsg = $"Error during load of Assembly '{file}'";
                     Logger.LogError(e, errorMsg);
                 }
             }
 
+            InitializeAllPlugins(dependencies);
+
+            return true;
+        }
+
+        private static void InitializeAllPlugins(Container dependencies) {
+            List<IPlugin> plugins = dependencies.ResolveMany<IPlugin>().ToList();
             plugins.Sort((x, y) => x.Priority - y.Priority);
 
             foreach (IPlugin plugin in plugins) {
@@ -71,12 +75,10 @@ namespace Forge.Engine {
                     }
 
                     string errorMsg =
-                        $"Error during Initialization of Plugin '{plugin.GetType().Name}'\nError: {e.Message}\n\n============= Stack Trace =============\n{stackTrace}";
+                        $"Error during initialization of Plugin '{plugin.GetType().Name}'\nError: {e.Message}\n\n============= Stack Trace =============\n{stackTrace}";
                     Logger.LogError(e, errorMsg);
                 }
             }
-
-            return true;
         }
     }
 }
