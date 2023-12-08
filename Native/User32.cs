@@ -24,7 +24,9 @@ namespace Forge.Native {
             unsafe {
                 ModAPI.API.AddWndProc(((_, msg, param, lParam) => {
 
+#pragma warning disable CS0618 // Type or member is obsolete
                     var winMains = WndProc?.GetInvocationList();
+#pragma warning restore CS0618 // Type or member is obsolete
 
                     if (winMains == null) return 0;
                     foreach (Delegate? winMain in winMains) {
@@ -42,6 +44,7 @@ namespace Forge.Native {
 
         }
 
+        [Obsolete("Use functionality provided by other engines or functions (like the UXEngine) instead.")]
         public static Func<WndProcMsg, IntPtr, IntPtr, bool>? WndProc { get; set; }
     }
 }
