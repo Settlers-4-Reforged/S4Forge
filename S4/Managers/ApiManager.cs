@@ -9,7 +9,7 @@ using System.Text;
 namespace Forge.S4.Managers {
     internal class ApiManager {
         public static void RegisterDependencies() {
-            DI.Dependencies.Register<Game.PlayerApi, Game.PlayerApi>();
+            DI.Dependencies.Register<Game.PlayerApi, Game.PlayerApi>(Reuse.Singleton);
         }
     }
 }
