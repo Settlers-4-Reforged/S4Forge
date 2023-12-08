@@ -31,12 +31,6 @@ namespace Forge.S4.Managers {
             return "en";
         }
 
-        public static Tribe GetCurrentTribe() {
-            uint player = ModAPI.API.GetLocalPlayer();
-
-            return (Tribe)ModAPI.API.GetPlayerTribe(player);
-        }
-
         /// <summary>
         /// IniFile is used to read and/or write an ini file.
         /// </summary>

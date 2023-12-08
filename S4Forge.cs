@@ -4,6 +4,7 @@ using Forge.Config;
 using Forge.Engine;
 using Forge.Logging;
 using Forge.Native;
+using Forge.S4.Managers;
 
 using NetModAPI;
 
@@ -36,6 +37,8 @@ namespace Forge {
             };
 
             DI.Dependencies.RegisterInstanceMany(this);
+
+            ApiManager.RegisterDependencies();
 
             ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
 
