@@ -13,7 +13,7 @@ using System.Text;
 using DirectDrawSurface = Microsoft.DirectX.DirectDraw.Surface;
 
 namespace Forge.S4.Callbacks {
-    public static class Callbacks {
+    public class Callbacks {
 
         #region Delegates
 
@@ -38,12 +38,12 @@ namespace Forge.S4.Callbacks {
         /// <summary>
         /// Event that is called when the map is initialized.
         /// </summary>
-        public static event MapInitCallback? OnMapInit;
+        public event MapInitCallback? OnMapInit;
 
         /// <summary>
         /// Event that is called when a map script is opened.
         /// </summary>
-        public static event LuaOpenCallback? OnLuaOpen;
+        public event LuaOpenCallback? OnLuaOpen;
 
         #endregion
 
@@ -52,12 +52,12 @@ namespace Forge.S4.Callbacks {
         /// <summary>
         /// Event that is called when the mouse is clicked.
         /// </summary>
-        public static event MouseCallback? OnMouse;
+        public event MouseCallback? OnMouse;
         /// <summary>
         /// Event that is called when the mouse is clicked.
         /// UI element pointer to game memory is passed.
         /// </summary>
-        public static event MouseCallbackUnsafe? OnMouseUnsafe;
+        public event MouseCallbackUnsafe? OnMouseUnsafe;
 
         #endregion
 
@@ -66,17 +66,17 @@ namespace Forge.S4.Callbacks {
         /// <summary>
         /// Event that is called when a settler move command is sent.
         /// </summary>
-        public static event SettlerSendCallback? OnSettlerSend;
+        public event SettlerSendCallback? OnSettlerSend;
 
         /// <summary>
         /// Event that is called every tick.
         /// </summary>
-        public static event TickCallback? OnTick;
+        public event TickCallback? OnTick;
 
         /// <summary>
         /// Event that is called when an entity is spawned or destructed.
         /// </summary>
-        public static event EntityCallback? OnEntity;
+        public event EntityCallback? OnEntity;
 
         #endregion
 
@@ -84,38 +84,38 @@ namespace Forge.S4.Callbacks {
         /// <summary>
         /// Event that is called every frame.
         /// </summary>
-        public static event GameFrameCallback? OnFrame;
+        public event GameFrameCallback? OnFrame;
 
         /// <summary>
         /// Event that is called when any "in-world" element is drawn.
         /// </summary>
-        public static event DrawEntityCallback? OnDrawEntity;
+        public event DrawEntityCallback? OnDrawEntity;
 
         /// <summary>
         /// Event that is called when a gui surface is drawn onto the screen.
         /// </summary>
-        public static event SurfaceDrawCallback? OnSurfaceDraw;
+        public event SurfaceDrawCallback? OnSurfaceDraw;
 
         /// <summary>
         /// Event that is called when a gui element is drawn onto a gui surface.
         /// </summary>
-        public static event UIElementDrawCallback? OnUIElementDraw;
+        public event UIElementDrawCallback? OnUIElementDraw;
 
         /// <summary>
         /// Event that is called when a gui element is drawn onto a gui surface.
         /// UI element pointer to game memory is passed.
         /// </summary>
-        public static event UIElementDrawCallbackUnsafe? OnUIElementDrawUnsafe;
+        public event UIElementDrawCallbackUnsafe? OnUIElementDrawUnsafe;
 
         /// <summary>
         /// Event that is called when a gui surface is cleared.
         /// </summary>
-        public static event SurfaceClearCallback? OnSurfaceClear;
+        public event SurfaceClearCallback? OnSurfaceClear;
 
         #endregion
 
 
-        static unsafe Callbacks() {
+        unsafe Callbacks() {
             ModAPI.API.AddFrameListener((surface, width, reserved) => {
                 using Surface? directDrawSurface = DDrawUtil.SurfaceFromPointer(surface);
 
