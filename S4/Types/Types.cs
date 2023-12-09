@@ -17,6 +17,6 @@
         Maya,
         Dark,
         Trojan,
-        Default,
+        Default = -1,
     }
 }
