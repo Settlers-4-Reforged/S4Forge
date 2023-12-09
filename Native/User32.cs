@@ -44,7 +44,17 @@ namespace Forge.Native {
 
         }
 
+        /// <summary>
+        /// The WndProc delegate is called for every message that is sent to the game window.
+        /// </summary>
+        /// <returns>
+        /// Return true if the message was handled, false otherwise.
+        /// <br/>
+        /// When returning true, the message will not be processed by the game or any other callback further down the chain.
+        /// </returns>
+        public delegate bool WndProcDelegate(WndProcMsg msg, IntPtr wParam, IntPtr lParam);
+
         [Obsolete("Use functionality provided by other engines or functions (like the UXEngine) instead.")]
-        public static Func<WndProcMsg, IntPtr, IntPtr, bool>? WndProc { get; set; }
+        public static WndProcDelegate? WndProc { get; set; }
     }
 }
