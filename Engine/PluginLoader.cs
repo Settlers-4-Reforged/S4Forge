@@ -13,8 +13,11 @@ namespace Forge.Engine {
     internal static class PluginLoader {
         const string PluginExtension = "*.nasi";
 
+        static readonly string PluginDirectory = Path.Combine(Environment.CurrentDirectory + "/plugins/Forge/Plugins");
+        const string PluginLibFolder = "Lib";
+
         public static bool LoadAllPlugins(Container dependencies) {
-            var files = Directory.GetFiles(Environment.CurrentDirectory + "/plugins/Forge/Plugins", PluginExtension);
+            var files = Directory.GetFiles(PluginDirectory, PluginExtension);
 
             Logger.LogInfo($"Found {files.Length} plugin(s) to load.");
 
@@ -24,8 +27,13 @@ namespace Forge.Engine {
                     Logger.LogInfo(msg);
 
                     Assembly pluginAssembly = Assembly.LoadFrom(file);
-
                     AssemblyInitializations.AddAssemblyLoadSource(pluginAssembly);
+
+                    string pluginFolder = Path.Combine(PluginDirectory, Path.GetFileNameWithoutExtension(file));
+                    bool hasPluginFolder = Directory.Exists(pluginFolder);
+                    if (hasPluginFolder) {
+                        AssemblyInitializations.AddFolderLoadSource(Path.Combine(pluginFolder, PluginLibFolder));
+                    }
 
                     var types = new List<Type>(pluginAssembly.GetTypes());
 

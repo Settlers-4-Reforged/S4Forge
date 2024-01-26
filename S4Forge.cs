@@ -27,15 +27,8 @@ namespace Forge {
 
         public void Initialize() {
             AssemblyInitializations.InitAssemblyLoadHandler();
-            AssemblyInitializations.AddLegacyShims();
 
-            TaskScheduler.UnobservedTaskException += (s, e) => {
-                Logger.LogError(e.Exception, "An unobserved task exception was thrown");
-            };
-            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
-            AppDomain.CurrentDomain.FirstChanceException += (s, e) => {
-                Logger.LogError(e.Exception, "A first chance exception was thrown");
-            };
+            AddExceptionHandling();
 
             DI.Dependencies.RegisterInstanceMany(this);
             DI.Dependencies.Register<Callbacks>(Reuse.Singleton);
@@ -58,6 +51,16 @@ namespace Forge {
             }
 
             Logger.LogInfo("Finished initializing Forge");
+        }
+
+        private void AddExceptionHandling() {
+            TaskScheduler.UnobservedTaskException += (s, e) => {
+                Logger.LogError(e.Exception, "An unobserved task exception was thrown");
+            };
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            AppDomain.CurrentDomain.FirstChanceException += (s, e) => {
+                Logger.LogError(e.Exception, "A first chance exception was thrown");
+            };
         }
 
 

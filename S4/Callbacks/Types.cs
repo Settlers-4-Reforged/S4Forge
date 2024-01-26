@@ -1,7 +1,5 @@
 ﻿using Forge.S4.Types;
 
-using Microsoft.DirectX.Direct3D;
-
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

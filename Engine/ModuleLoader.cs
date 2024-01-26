@@ -20,11 +20,10 @@ namespace Forge.Engine {
             return iEngine;
         }
 
-        private static readonly string[] Engines = new string[] { "UX-Engine.dll", "Plugin-Engine.dll" };
+        private static readonly string[] Engines = new string[] { "UX-Engine.dll" };
         private const string EnginePath = @"\plugins\Forge\Engines\";
 
         internal static void RegisterAvailableEngines(Container dependencies) {
-
             foreach (string engine in Engines) {
                 try {
                     Assembly engineAssembly = Assembly.LoadFile(Environment.CurrentDirectory + EnginePath + engine);

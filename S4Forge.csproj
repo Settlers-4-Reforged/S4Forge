@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>.net8.0-windows7.0</TargetFrameworks>
     <RootNamespace>Forge</RootNamespace>
     <Nullable>enable</Nullable>
     <PlatformTarget>x86</PlatformTarget>
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
-    <BaseOutputPath>$(SolutionDir)BUILD\Forge</BaseOutputPath>
+    <OutputPath>$(SolutionDir)BUILD\Forge\$(Configuration)</OutputPath>
     <SignAssembly>False</SignAssembly>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
@@ -51,42 +51,6 @@
   <ItemGroup>
     <None Remove=".git" />
     <None Remove=".gitignore" />
-    <None Remove="Lib\Microsoft.DirectX.AudioVideoPlayback.dll" />
-    <None Remove="Lib\Microsoft.DirectX.Diagnostics.dll" />
-    <None Remove="Lib\Microsoft.DirectX.Direct3D.dll" />
-    <None Remove="Lib\Microsoft.DirectX.Direct3DX.dll" />
-    <None Remove="Lib\Microsoft.DirectX.DirectDraw.dll" />
-    <None Remove="Lib\Microsoft.DirectX.DirectInput.dll" />
-    <None Remove="Lib\Microsoft.DirectX.DirectPlay.dll" />
-    <None Remove="Lib\Microsoft.DirectX.DirectSound.dll" />
-    <None Remove="Lib\Microsoft.DirectX.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.AudioVideoPlayback.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.Diagnostics.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.Direct3D.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.Direct3DX.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectDraw.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectInput.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectPlay.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.DirectSound.dll" />
-    <EmbeddedResource Include="Lib\Microsoft.DirectX.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.DirectX">
-      <HintPath>Lib\Microsoft.DirectX.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.DirectX.Direct3D">
-      <HintPath>Lib\Microsoft.DirectX.Direct3D.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.DirectX.Direct3DX">
-      <HintPath>Lib\Microsoft.DirectX.Direct3DX.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.DirectX.DirectDraw">
-      <HintPath>Lib\Microsoft.DirectX.DirectDraw.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <Choose>

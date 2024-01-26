@@ -14,7 +14,6 @@ using DirectDrawSurface = Microsoft.DirectX.DirectDraw.Surface;
 
 namespace Forge.S4.Callbacks {
     public class Callbacks {
-
         #region Delegates
 
         public delegate void GameFrameCallback(DirectDrawSurface? surface, int pillarBoxWidth);
@@ -115,7 +114,7 @@ namespace Forge.S4.Callbacks {
         #endregion
 
 
-        unsafe Callbacks() {
+        public unsafe Callbacks() {
             ModAPI.API.AddFrameListener((surface, width, reserved) => {
                 using Surface? directDrawSurface = DDrawUtil.SurfaceFromPointer(surface);
 
