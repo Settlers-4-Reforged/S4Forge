@@ -63,7 +63,7 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="S4APIWrapper" Version="0.2.*">
+        <PackageReference Include="S4APIWrapper" Version="0.2.1">
 	        <HintPath>S4APIWrapper.asi</HintPath>
         </PackageReference>
       </ItemGroup>
