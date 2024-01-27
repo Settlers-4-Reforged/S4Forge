@@ -29,16 +29,16 @@ namespace Forge.Config {
 #pragma warning disable CS0618 // Type or member is obsolete
             AppDomain.CurrentDomain.AppendPrivatePath(path);
             AddDllDirectory(path);
+            folders.Add(path);
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 
         internal static void InitAssemblyLoadHandler() {
             // ReSharper disable once InconsistentNaming
-            const int LOAD_LIBRARY_SEARCH_USER_DIRS = 0x00000400;
-            SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_USER_DIRS);
+            const int LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
+            SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
 
-            folders.AddRange(new[] { @"plugins/", "plugins/Forge/Lib", "plugins/Forge/Engines", "plugins/Forge/Plugins" });
-            foreach (string folder in folders) {
+            foreach (string folder in new[] { @"plugins/", "plugins/Forge/Lib", "plugins/Forge/Engines", "plugins/Forge/Plugins" }) {
                 AddFolderLoadSource(Path.Combine(Environment.CurrentDirectory, folder));
             }
 
