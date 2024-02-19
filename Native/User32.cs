@@ -13,6 +13,9 @@ namespace Forge.Native {
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetCursorPos(out Pos lpPoint);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool ScreenToClient(IntPtr hWnd, ref Pos lpPoint);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
 
