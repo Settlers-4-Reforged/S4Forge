@@ -6,8 +6,8 @@ using System.Text;
 namespace Forge.Native {
     public class User32 {
         public struct Pos {
-            public long X;
-            public long Y;
+            public int X;
+            public int Y;
         }
 
         [DllImport("user32.dll", SetLastError = true)]
