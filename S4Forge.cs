@@ -59,6 +59,11 @@ namespace Forge {
             };
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             AppDomain.CurrentDomain.FirstChanceException += (s, e) => {
+                if (e.Exception is FileNotFoundException fnf && fnf.FileName?.EndsWith(".dll") == true) {
+                    // Skip assembly not found exceptions for dlls, as they are handled by the AssemblyResolve event and would rethrow there if not found
+                    return;
+                }
+
                 Logger.LogError(e.Exception, "A first chance exception was thrown");
             };
         }
