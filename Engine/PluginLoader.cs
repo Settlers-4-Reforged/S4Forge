@@ -37,19 +37,24 @@ namespace Forge.Engine {
 
                     var types = new List<Type>(pluginAssembly.GetTypes());
 
-                    Type? pluginType = (from Type t in types
-                                        where
-                                            t.GetInterface(nameof(IPlugin)) != null &&
-                                            !t.IsAbstract &&
-                                            !t.IsInterface
-                                        select t).FirstOrDefault();
-                    if (pluginType == null) {
-                        Logger.LogError(null, $"Failed to find a valid plugin class in '{file}'");
+                    Type[] pluginTypes = (from Type t in types
+                                          where
+                                              t.GetInterface(nameof(IPlugin)) != null &&
+                                              !t.IsAbstract &&
+                                              !t.IsInterface
+                                          select t).ToArray();
+
+                    if (pluginTypes.Length == 0) {
+                        Logger.LogError(null, $"Failed to find any valid plugin classes in '{file}'");
                         continue;
                     }
-                    Logger.LogInfo($"Found Plugin '{pluginType.Name}'");
 
-                    dependencies.RegisterMany(new[] { pluginType }, Reuse.Singleton);
+                    foreach (Type pluginType in pluginTypes) {
+                        Logger.LogInfo($"Found Plugin '{pluginType.Name}'");
+                        dependencies.RegisterMany(new[] { pluginType }, Reuse.Singleton);
+                    }
+
+
                 } catch (Exception e) {
                     string stackTrace = e.StackTrace;
                     while (e.InnerException != null) {
