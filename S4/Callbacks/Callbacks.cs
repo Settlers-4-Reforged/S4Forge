@@ -10,27 +10,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using DirectDrawSurface = Microsoft.DirectX.DirectDraw.Surface;
-
 namespace Forge.S4.Callbacks {
-    public class Callbacks {
-        #region Delegates
-
-        public delegate void GameFrameCallback(DirectDrawSurface? surface, int pillarBoxWidth);
-        public delegate void MapInitCallback();
-        public unsafe delegate void MouseCallbackUnsafe(uint mouseButton, int x, int y, uint msgId, S4UIElement* uiElement);
-        public delegate void MouseCallback(uint mouseButton, int x, int y, uint msgId, S4UIElement? uiElement);
-        public delegate void SettlerSendCallback(uint position, uint command);
-        public delegate void TickCallback(uint tick, bool hasEvent, bool isDelayed);
-        public delegate void LuaOpenCallback();
-        public delegate void DrawEntityCallback(S4EntityDrawParams parameter, bool discard);
-        public delegate void SurfaceDrawCallback(IntPtr bltParams, bool discard);
-        public delegate void EntityCallback(ushort entity, ushort cause);
-        public delegate void UIElementDrawCallback(S4UIElementDrawParams bltParams, S4UIElement? uiElement, bool discard);
-        public unsafe delegate void UIElementDrawCallbackUnsafe(S4UIElementDrawParams bltParams, S4UIElement* uiElement, bool discard);
-        public delegate void SurfaceClearCallback(IntPtr bltParams, bool discard);
-
-        #endregion
+    public interface ICallbacks {
 
         #region Initializations
 
@@ -112,7 +93,38 @@ namespace Forge.S4.Callbacks {
         public event SurfaceClearCallback? OnSurfaceClear;
 
         #endregion
+    }
 
+    public class TestCallbacks : ICallbacks {
+        public event MapInitCallback? OnMapInit;
+        public event LuaOpenCallback? OnLuaOpen;
+        public event MouseCallback? OnMouse;
+        public event MouseCallbackUnsafe? OnMouseUnsafe;
+        public event SettlerSendCallback? OnSettlerSend;
+        public event TickCallback? OnTick;
+        public event EntityCallback? OnEntity;
+        public event GameFrameCallback? OnFrame;
+        public event DrawEntityCallback? OnDrawEntity;
+        public event SurfaceDrawCallback? OnSurfaceDraw;
+        public event UIElementDrawCallback? OnUIElementDraw;
+        public event UIElementDrawCallbackUnsafe? OnUIElementDrawUnsafe;
+        public event SurfaceClearCallback? OnSurfaceClear;
+    }
+
+    public class Callbacks : ICallbacks {
+        public event MapInitCallback? OnMapInit;
+        public event LuaOpenCallback? OnLuaOpen;
+        public event MouseCallback? OnMouse;
+        public event MouseCallbackUnsafe? OnMouseUnsafe;
+        public event SettlerSendCallback? OnSettlerSend;
+        public event TickCallback? OnTick;
+        public event EntityCallback? OnEntity;
+        public event GameFrameCallback? OnFrame;
+        public event DrawEntityCallback? OnDrawEntity;
+        public event SurfaceDrawCallback? OnSurfaceDraw;
+        public event UIElementDrawCallback? OnUIElementDraw;
+        public event UIElementDrawCallbackUnsafe? OnUIElementDrawUnsafe;
+        public event SurfaceClearCallback? OnSurfaceClear;
 
         public unsafe Callbacks() {
             ModAPI.API.AddFrameListener((surface, width, reserved) => {

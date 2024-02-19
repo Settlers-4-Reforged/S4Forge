@@ -31,7 +31,7 @@ namespace Forge {
             AddExceptionHandling();
 
             DI.Dependencies.RegisterInstanceMany(this);
-            DI.Dependencies.Register<Callbacks>(Reuse.Singleton);
+            DI.Dependencies.Register<ICallbacks, Callbacks>(Reuse.Singleton);
             ApiManager.RegisterDependencies();
 
             ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
