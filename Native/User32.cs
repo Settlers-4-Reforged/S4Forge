@@ -20,7 +20,11 @@ namespace Forge.Native {
             MessageBox(IntPtr.Zero, text, caption, 0);
         }
 
+        private static bool registeredWndProc = false;
         internal static void RegisterWndProc() {
+            if (registeredWndProc) return;
+            registeredWndProc = true;
+
             unsafe {
                 ModAPI.API.AddWndProc(((_, msg, param, lParam) => {
 
@@ -29,10 +33,8 @@ namespace Forge.Native {
 #pragma warning restore CS0618 // Type or member is obsolete
 
                     if (winMains == null) return 0;
-                    foreach (Delegate? winMain in winMains) {
-                        if (winMain is not Func<WndProcMsg, IntPtr, IntPtr, bool> func) continue;
-
-                        if (func((WndProcMsg)msg, new IntPtr(param), new IntPtr(lParam))) {
+                    foreach (WndProcDelegate winMain in winMains) {
+                        if (winMain((WndProcMsg)msg, new UIntPtr(param), new UIntPtr((uint)lParam))) {
                             return 0;
                         }
                     }
@@ -52,9 +54,14 @@ namespace Forge.Native {
         /// <br/>
         /// When returning true, the message will not be processed by the game or any other callback further down the chain.
         /// </returns>
-        public delegate bool WndProcDelegate(WndProcMsg msg, IntPtr wParam, IntPtr lParam);
+        public delegate bool WndProcDelegate(WndProcMsg msg, UIntPtr wParam, UIntPtr lParam);
 
         [Obsolete("Use functionality provided by other engines or functions (like the UXEngine) instead.")]
-        public static WndProcDelegate? WndProc { get; set; }
+        private static WndProcDelegate? WndProc { get; set; }
+
+        public static void AddWndProc(WndProcDelegate wndProc) {
+            RegisterWndProc();
+            WndProc += wndProc;
+        }
     }
 }
