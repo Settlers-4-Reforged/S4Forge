@@ -64,7 +64,9 @@ namespace Forge.Native {
 
         public static void AddWndProc(WndProcDelegate wndProc) {
             RegisterWndProc();
+#pragma warning disable CS0618 // Type or member is obsolete
             WndProc += wndProc;
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }

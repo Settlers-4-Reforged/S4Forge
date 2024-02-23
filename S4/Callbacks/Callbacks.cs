@@ -95,6 +95,7 @@ namespace Forge.S4.Callbacks {
         #endregion
     }
 
+#pragma warning disable CS0067
     public class TestCallbacks : ICallbacks {
         public event MapInitCallback? OnMapInit;
         public event LuaOpenCallback? OnLuaOpen;
@@ -125,6 +126,7 @@ namespace Forge.S4.Callbacks {
         public event UIElementDrawCallback? OnUIElementDraw;
         public event UIElementDrawCallbackUnsafe? OnUIElementDrawUnsafe;
         public event SurfaceClearCallback? OnSurfaceClear;
+#pragma warning restore CS0067
 
         public unsafe Callbacks() {
             ModAPI.API.AddFrameListener((surface, width, reserved) => {
