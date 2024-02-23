@@ -50,6 +50,11 @@ namespace Forge.Config {
                 string resourceName = assemblyName + ".dll";
 
                 foreach (Assembly assembly in assemblies) {
+                    if (assembly.GetName().Name == assemblyName) {
+                        Logger.LogDebug($"Assembly {assemblyName} already loaded");
+                        return assembly;
+                    }
+
                     Logger.LogDebug($"Checking assembly {assembly.GetName().Name} for {resourceName}");
                     string? resource = Array.Find(assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
                     if (resource == null)
