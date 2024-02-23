@@ -1,4 +1,6 @@
-﻿using DryIoc;
+﻿using CrashHandling;
+
+using DryIoc;
 
 using Forge.Config;
 using Forge.Engine;
@@ -11,12 +13,15 @@ using NetModAPI;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Logger = Forge.Logging.Logger;
@@ -66,16 +71,53 @@ namespace Forge {
 
                 Logger.LogError(e.Exception, "A first chance exception was thrown");
             };
+
+            Logger.LogInfo("Added exception handling");
         }
 
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [HandleProcessCorruptedStateExceptions()]
         private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
-            Logger.LogError((Exception)e.ExceptionObject, "Forge detected an unhandled exception");
+            Exception exception = (Exception)e.ExceptionObject;
+
 #if DEBUG
-            User32.MessageBox("Forge detected an unhandled exception and is now halting execution.\nEither attach a debugger, or ignore this error", "S4Forge");
+            User32.MessageBox("Forge detected an unhandled managed exception and is now halting execution.\nEither attach a debugger, or ignore this error", "S4Forge");
 #endif
+            Logger.LogError(exception, "Forge detected an unhandled exception");
+
+            StackTrace trace = new StackTrace(exception);
+
+            ICrashReporter crashReporter = CrashReporterService.GetCrashReporter();
+            crashReporter.AddPropertyToCrashReport("ManagedTrace", exception.StackTrace);
+
+
+            Assembly[] pluginAssemblies = PluginLoader.GetActivePluginAssemblies().ToArray();
+            Assembly? exceptionAssembly = null;
+
+            for (int i = 0; i < trace.FrameCount; i++) {
+                StackFrame frame = trace.GetFrame(i)!;
+                MethodBase? method = frame.GetMethod();
+                Assembly? declaringTypeAssembly = method?.DeclaringType?.Assembly;
+                if (declaringTypeAssembly == null)
+                    continue;
+
+                if (pluginAssemblies.Contains(declaringTypeAssembly)) {
+                    exceptionAssembly = declaringTypeAssembly;
+                }
+
+                return;
+            }
+
+            if (exceptionAssembly == null) return;
+
+            CrashReportSource source = new CrashReportSource();
+
+            string exceptionMessage = "";
+            // TODO: Add custom exception handling for plugins
+            // Probably in form of a custom class in the plugin assembly that implements ICrashReporter
+
+            // TODO: Improve stack trace handling with native stack
+
+            crashReporter.ReportCrash(source, exceptionMessage);
+            return;
         }
 
     }

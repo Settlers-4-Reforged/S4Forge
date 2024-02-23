@@ -93,5 +93,9 @@ namespace Forge.Engine {
                 }
             }
         }
+
+        public static IEnumerable<Assembly> GetActivePluginAssemblies() {
+            return DI.Dependencies.ResolveMany<IPlugin>().Select(plugin => plugin.GetType().Assembly).DistinctBy(assembly => assembly.Location);
+        }
     }
 }
