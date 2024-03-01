@@ -32,14 +32,13 @@ namespace Forge {
     public class S4Forge : IForge {
 
         public void Initialize() {
+            Logger.LogInfo("Initializing Forge...");
+
             AssemblyInitializations.InitAssemblyLoadHandler();
 
             AddExceptionHandling();
 
-            DI.Dependencies.RegisterInstanceMany(this);
-            DI.Dependencies.Register<ICallbacks, Callbacks>(Reuse.Singleton);
-            ApiManager.RegisterDependencies();
-            NotificationsService.RegisterDependencies();
+            DI.RegisterDefaultDependencies(this);
 
             ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
 

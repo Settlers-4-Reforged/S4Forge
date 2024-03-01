@@ -1,5 +1,9 @@
 ﻿using DryIoc;
 
+using Forge.Notifications;
+using Forge.S4.Callbacks;
+using Forge.S4.Managers;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +19,13 @@ namespace Forge.Config {
 
         static DI() {
 
+        }
+
+        public static void RegisterDefaultDependencies(S4Forge forge) {
+            Dependencies.RegisterInstanceMany(forge);
+            Dependencies.Register<ICallbacks, Callbacks>(Reuse.Singleton);
+            ApiManager.RegisterDependencies();
+            NotificationsService.RegisterDependencies();
         }
     }
 }
