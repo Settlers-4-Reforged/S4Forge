@@ -65,6 +65,9 @@ namespace Forge {
             Logger.LogInfo("Added exception handling");
         }
 
+
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [HandleProcessCorruptedStateExceptions]
         private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
             Exception exception = (Exception)e.ExceptionObject;
 
@@ -91,9 +94,8 @@ namespace Forge {
 
                 if (pluginAssemblies.Contains(declaringTypeAssembly)) {
                     exceptionAssembly = declaringTypeAssembly;
+                    break;
                 }
-
-                return;
             }
 
             if (exceptionAssembly == null) return;
