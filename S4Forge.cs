@@ -6,6 +6,7 @@ using Forge.Config;
 using Forge.Engine;
 using Forge.Logging;
 using Forge.Native;
+using Forge.Notifications;
 using Forge.S4.Callbacks;
 using Forge.S4.Managers;
 
@@ -38,6 +39,7 @@ namespace Forge {
             DI.Dependencies.RegisterInstanceMany(this);
             DI.Dependencies.Register<ICallbacks, Callbacks>(Reuse.Singleton);
             ApiManager.RegisterDependencies();
+            NotificationsService.RegisterDependencies();
 
             ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
 
