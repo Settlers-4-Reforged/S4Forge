@@ -1,5 +1,5 @@
 ﻿using Forge.Native;
-using Forge.S4.Types;
+using Forge.S4.Types.Native.UI;
 using Forge.UX.Native;
 
 using System;

@@ -1,5 +1,5 @@
 ﻿using Forge.S4.Types;
-
+using Forge.S4.Types.Native.UI;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

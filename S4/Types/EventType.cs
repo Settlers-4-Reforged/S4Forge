@@ -1,5 +1,5 @@
 ﻿namespace Forge.S4.Types {
-    public enum Event {
+    public enum EventType : uint {
         MouseMove = 5,
         LMouseDown = 7,
         LMouseUp = 8,
