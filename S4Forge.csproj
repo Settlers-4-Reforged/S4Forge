@@ -14,6 +14,7 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <Platforms>x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -63,7 +64,7 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="S4APIWrapper" Version="0.2.2">
+        <PackageReference Include="S4APIWrapper" Version="0.3.0">
 	        <HintPath>S4APIWrapper.asi</HintPath>
         </PackageReference>
       </ItemGroup>
