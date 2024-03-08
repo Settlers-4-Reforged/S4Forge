@@ -5,8 +5,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Forge.S4.Types.Native.UI {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
     public unsafe struct GameState {

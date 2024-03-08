@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 
 namespace Forge.Native {
-    public class User32 {
+    public partial class User32 {
         public struct Pos {
             public int X;
             public int Y;
+        }
+        public struct Rect {
+            public int X;
+            public int Y;
+            public int Z;
+            public int W;
         }
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -16,8 +23,17 @@ namespace Forge.Native {
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool ScreenToClient(IntPtr hWnd, ref Pos lpPoint);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool GetWindowRect(IntPtr hWnd, ref Rect lpRect);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
+
+        [LibraryImport("user32.dll", SetLastError = true)]
+        public static partial IntPtr SetCapture(IntPtr hWnd);
+
+        [LibraryImport("user32.dll", SetLastError = true)]
+        public static partial int ReleaseCapture();
 
         public static void MessageBox(string text, string caption) {
             MessageBox(IntPtr.Zero, text, caption, 0);
