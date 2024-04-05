@@ -64,9 +64,6 @@ namespace Forge {
             Logger.LogInfo("Added exception handling");
         }
 
-
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [HandleProcessCorruptedStateExceptions]
         private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
             Exception exception = (Exception)e.ExceptionObject;
 
@@ -77,8 +74,8 @@ namespace Forge {
 
             StackTrace trace = new StackTrace(exception);
 
-            ICrashReporter crashReporter = CrashReporterService.GetCrashReporter();
-            crashReporter.AddPropertyToCrashReport("ManagedTrace", exception.StackTrace);
+            IDebugReporter crashReporter = DebugService.GetReporter();
+            crashReporter.AddPropertyToReport("ManagedTrace", exception.StackTrace);
 
 
             Assembly[] pluginAssemblies = PluginLoader.GetActivePluginAssemblies().ToArray();
@@ -99,7 +96,7 @@ namespace Forge {
 
             if (exceptionAssembly == null) return;
 
-            CrashReportSource source = new CrashReportSource();
+            DebugReportSource source = new DebugReportSource();
 
             string exceptionMessage = "";
             // TODO: Add custom exception handling for plugins
