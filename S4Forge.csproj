@@ -5,7 +5,7 @@
     <RootNamespace>Forge</RootNamespace>
     <Nullable>enable</Nullable>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <OutputPath>$(SolutionDir)BUILD\Forge\$(Configuration)</OutputPath>
