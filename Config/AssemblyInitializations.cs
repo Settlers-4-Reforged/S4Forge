@@ -27,6 +27,8 @@ namespace Forge.Config {
 
         public static void AddFolderLoadSource(string path) {
 #pragma warning disable CS0618 // Type or member is obsolete
+            Logger.LogDebug($"Adding folder {path} to AssemblyLoadSource...");
+
             AppDomain.CurrentDomain.AppendPrivatePath(path);
             AddDllDirectory(path);
             folders.Add(path);
