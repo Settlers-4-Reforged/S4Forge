@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Forge.S4.Types.Native.UI {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-    public struct UIMenu {
+    public struct S4UIMenu {
         ushort type;
         ushort x;
         ushort y;
