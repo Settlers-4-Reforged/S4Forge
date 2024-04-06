@@ -11,7 +11,7 @@ namespace Forge.S4.Managers {
         public static void RegisterDependencies() {
             DI.Dependencies.Register<Game.ISoundApi, Game.SoundApi>(Reuse.Singleton);
             DI.Dependencies.Register<Game.IEventApi, Game.EventApi>(Reuse.Singleton);
-            DI.Dependencies.Register<Game.PlayerApi, Game.PlayerApi>(Reuse.Singleton);
+            DI.Dependencies.Register<Game.IPlayerApi, Game.PlayerApi>(Reuse.Singleton);
         }
     }
 }

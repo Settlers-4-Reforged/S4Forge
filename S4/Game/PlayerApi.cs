@@ -6,7 +6,16 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Forge.S4.Game {
-    public class PlayerApi {
+
+    public interface IPlayerApi {
+        uint GetNumberOfPlayers();
+        Player GetPlayer(uint id);
+        Player GetLocalPlayer();
+        uint GetLocalPlayerId();
+        Tribe GetCurrentTribe();
+    }
+
+    internal class PlayerApi : IPlayerApi {
         public uint GetNumberOfPlayers() {
             return ModAPI.API.GetNumberOfPlayers();
         }

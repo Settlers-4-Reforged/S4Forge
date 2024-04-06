@@ -14,7 +14,7 @@ namespace Forge.S4.Game {
         int SoundVolume { get; set; }
     }
 
-    public class SoundApi : ISoundApi {
+    internal class SoundApi : ISoundApi {
         public void PlaySound(int id) {
             ModAPI.API.PlaySound(id);
         }

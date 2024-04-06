@@ -14,7 +14,7 @@ namespace Forge.S4.Game {
         void SendEvent(EventType type, uint wparam, uint lparam, sbyte unknown);
     }
 
-    public class EventApi : IEventApi {
+    internal class EventApi : IEventApi {
         private unsafe void* EventManager => (void*)GameValues.ReadValue<int>(0x106B11C);
 
         public void SendEvent(EventType type, uint wparam, uint lparam, sbyte unknown) {
