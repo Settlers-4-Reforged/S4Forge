@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Forge.Native {
     internal static class ModAPI {
-        internal static NetS4ModApi API;
+        internal static INetS4ModApi API;
 
         static ModAPI() {
             API = new NetS4ModApi();
