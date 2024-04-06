@@ -1,4 +1,5 @@
-﻿using Forge.Native;
+﻿using Forge.Config;
+using Forge.Native;
 using Forge.S4.Types;
 
 using System;
@@ -7,24 +8,17 @@ using System.Text;
 
 namespace Forge.S4.Game {
 
-    public interface IPlayerApi {
-        uint GetNumberOfPlayers();
-        Player GetPlayer(uint id);
-        Player GetLocalPlayer();
-        uint GetLocalPlayerId();
-        Tribe GetCurrentTribe();
-    }
-
-    internal class PlayerApi : IPlayerApi {
+    [GenerateAutomaticInterface]
+    internal sealed class PlayerApi : IPlayerApi {
         public uint GetNumberOfPlayers() {
             return ModAPI.API.GetNumberOfPlayers();
         }
 
-        public Player GetPlayer(uint id) {
-            return new Player(id);
+        public IPlayer GetPlayer(uint id) {
+            return Player.FromId(id);
         }
 
-        public Player GetLocalPlayer() {
+        public IPlayer GetLocalPlayer() {
             return GetPlayer(GetLocalPlayerId());
         }
 

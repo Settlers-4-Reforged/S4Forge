@@ -1,16 +1,20 @@
-﻿using System;
+﻿using Forge.Config;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Forge.S4.Types {
-    public class EcoSector(uint id) {
+
+    [GenerateAutomaticInterface]
+    internal class EcoSector(uint id) : IEcoSector {
         //TODO: maybe cache eco sector objects
 
-        public uint Id { get; init; } = id;
+        public uint Id { get; private set; } = id;
 
-        public Player Owner => Player.FromId(0);// TODO: fetch "owner" of EcoSector
+        public IPlayer Owner => Player.FromId(0);// TODO: fetch "owner" of EcoSector
 
         public bool ChangeGoodDistribution(GoodType good, BuildingType building, float percent) {
             //TODO: fetch "owner" of EcoSector to set as player id

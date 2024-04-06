@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Forge.Config;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Forge.S4.Types {
-    public class World {
+    [GenerateAutomaticInterface]
+    public class World : IWorld {
         public uint Size => Forge.Native.ModAPI.API.MapSize();
 
         public struct Resource {
@@ -84,7 +87,7 @@ namespace Forge.S4.Types {
             return Forge.Native.ModAPI.API.LandscapeSetResource(x, y, resource.ToNative());
         }
 
-        public Player GetTileOwnerAt(int x, int y) {
+        public IPlayer GetTileOwnerAt(int x, int y) {
             return Player.FromId(Forge.Native.ModAPI.API.LandscapeGetOwner(x, y));
         }
 
@@ -124,7 +127,7 @@ namespace Forge.S4.Types {
             return Forge.Native.ModAPI.API.LandscapeGetFogOfWar(x, y) / 255.0f;
         }
 
-        public EcoSector GetEcoSectorAt(int x, int y) {
+        public IEcoSector GetEcoSectorAt(int x, int y) {
             return new EcoSector(Forge.Native.ModAPI.API.LandscapeGetEcoSector(x, y));
         }
     }

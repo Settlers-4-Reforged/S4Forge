@@ -1,4 +1,5 @@
-﻿using Forge.Native;
+﻿using Forge.Config;
+using Forge.Native;
 
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Forge.S4.Game {
-    public interface ISoundApi {
-        void PlaySound(int id);
 
-        int MusicVolume { get; set; }
-        int SoundVolume { get; set; }
-    }
-
-    internal class SoundApi : ISoundApi {
+    [GenerateAutomaticInterface]
+    internal sealed class SoundApi : ISoundApi {
         public void PlaySound(int id) {
             ModAPI.API.PlaySound(id);
         }

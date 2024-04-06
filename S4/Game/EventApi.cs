@@ -1,4 +1,5 @@
-﻿using Forge.Native;
+﻿using Forge.Config;
+using Forge.Native;
 using Forge.S4.Types;
 using Forge.S4.Types.Native;
 
@@ -10,10 +11,7 @@ using System.Threading.Tasks;
 
 namespace Forge.S4.Game {
 
-    public interface IEventApi {
-        void SendEvent(EventType type, uint wparam, uint lparam, sbyte unknown);
-    }
-
+    [GenerateAutomaticInterface]
     internal class EventApi : IEventApi {
         private unsafe void* EventManager => (void*)GameValues.ReadValue<int>(0x106B11C);
 

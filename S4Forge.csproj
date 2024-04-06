@@ -10,7 +10,7 @@
     <DebugType>portable</DebugType>
     <OutputPath>$(SolutionDir)BUILD\Forge\$(Configuration)</OutputPath>
     <SignAssembly>False</SignAssembly>
-    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
@@ -44,6 +44,11 @@
     <None Remove="BUILD\**" />
 
     <None Include="README.md" Pack="true" PackagePath="\" />
+
+    <PackageReference Include="AutomaticInterface" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
     <PackageReference Include="DryIoc" Version="5.4.3" />
     <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" />

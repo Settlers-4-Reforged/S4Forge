@@ -1,11 +1,13 @@
-﻿using Forge.S4.Game;
+﻿using Forge.Config;
+using Forge.S4.Game;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Forge.S4.Types {
-    public readonly struct Player {
+    [GenerateAutomaticInterface]
+    internal class Player : IPlayer {
         const int PlayerCount = 8;
         private static readonly Player?[] players = new Player?[PlayerCount];
         public static Player FromId(uint id) => players[id] ??= new Player(id);
@@ -16,7 +18,7 @@ namespace Forge.S4.Types {
 
         public Player(uint id) => Id = id;
 
-        public uint Id { get; init; }
+        public uint Id { get; private set; }
 
         public bool IsLocalPlayer => Id == Forge.Native.ModAPI.API.GetLocalPlayer();
 

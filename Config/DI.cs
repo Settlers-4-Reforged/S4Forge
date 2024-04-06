@@ -28,4 +28,7 @@ namespace Forge.Config {
             NotificationsService.RegisterDependencies();
         }
     }
+
+    [AttributeUsage(AttributeTargets.Class)]
+    internal class GenerateAutomaticInterfaceAttribute : Attribute { }
 }
