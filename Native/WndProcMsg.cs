@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Forge.Native {
     public enum WndProcMsg {
+#pragma warning disable CA1707 // Identifiers should not contain underscores
         WM_NULL = 0x0000,
         WM_CREATE = 0x0001,
         WM_DESTROY = 0x0002,
@@ -101,8 +102,8 @@ namespace Forge.Native {
         WM_INPUT_DEVICE_CHANGE = 0x00FE,
         WM_INPUT = 0x00FF,
 
-        WM_KEYFIRST = 0x0100,
         WM_KEYDOWN = 0x0100,
+        WM_KEYFIRST = WM_KEYDOWN,
         WM_KEYUP = 0x0101,
         WM_CHAR = 0x0102,
         WM_DEADCHAR = 0x0103,
@@ -111,12 +112,12 @@ namespace Forge.Native {
         WM_SYSCHAR = 0x0106,
         WM_SYSDEADCHAR = 0x0107,
         WM_UNICHAR = 0x0109,
-        WM_KEYLAST = 0x0109,
+        WM_KEYLAST = WM_UNICHAR,
 
         WM_IME_STARTCOMPOSITION = 0x010D,
         WM_IME_ENDCOMPOSITION = 0x010E,
         WM_IME_COMPOSITION = 0x010F,
-        WM_IME_KEYLAST = 0x010F,
+        WM_IME_KEYLAST = WM_IME_COMPOSITION,
 
         WM_INITDIALOG = 0x0110,
         WM_COMMAND = 0x0111,
@@ -148,8 +149,8 @@ namespace Forge.Native {
         WM_CTLCOLORSTATIC = 0x0138,
         MN_GETHMENU = 0x01E1,
 
-        WM_MOUSEFIRST = 0x0200,
         WM_MOUSEMOVE = 0x0200,
+        WM_MOUSEFIRST = WM_MOUSEMOVE,
         WM_LBUTTONDOWN = 0x0201,
         WM_LBUTTONUP = 0x0202,
         WM_LBUTTONDBLCLK = 0x0203,
