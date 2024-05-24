@@ -1,78 +1,78 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>.net8.0-windows7.0</TargetFrameworks>
-    <RootNamespace>Forge</RootNamespace>
-    <Nullable>enable</Nullable>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>12.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>portable</DebugType>
-    <OutputPath>$(SolutionDir)BUILD\Forge\$(Configuration)</OutputPath>
-    <SignAssembly>False</SignAssembly>
-    <EnableNETAnalyzers>True</EnableNETAnalyzers>
-    <AnalysisLevel>latest-recommended</AnalysisLevel>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <Platforms>x86</Platforms>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>.net8.0-windows7.0</TargetFrameworks>
+        <RootNamespace>Forge</RootNamespace>
+        <Nullable>enable</Nullable>
+        <PlatformTarget>x86</PlatformTarget>
+        <LangVersion>12.0</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugType>portable</DebugType>
+        <OutputPath>$(SolutionDir)BUILD\Forge\$(Configuration)</OutputPath>
+        <SignAssembly>False</SignAssembly>
+        <EnableNETAnalyzers>True</EnableNETAnalyzers>
+        <AnalysisLevel>latest-recommended</AnalysisLevel>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <Platforms>x86</Platforms>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <!--NuGet Package settings:-->
-    <Title>S4Forge</Title>
-    <Authors>WizzardMaker</Authors>
-    <Description>
-      S4Forge - Modding Framework for Settlers 4
-    </Description>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageOutputPath>$(SolutionDir)BUILD\NuGet\</PackageOutputPath>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <FileVersion>$(AssemblyVersion)</FileVersion>
-    <Version>$(AssemblyVersion)</Version>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PropertyGroup>
+        <!--NuGet Package settings:-->
+        <Title>S4Forge</Title>
+        <Authors>WizzardMaker</Authors>
+        <Description>
+            S4Forge - Modding Framework for Settlers 4
+        </Description>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageOutputPath>$(SolutionDir)BUILD\NuGet\</PackageOutputPath>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <FileVersion>$(AssemblyVersion)</FileVersion>
+        <Version>$(AssemblyVersion)</Version>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-    <RepositoryUrl>http://gitlab.settlers4-hd.com/s4-plugins/modapi/s4-forge.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-  </PropertyGroup>
+        <RepositoryUrl>http://gitlab.settlers4-hd.com/s4-plugins/modapi/s4-forge.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="BUILD\**" />
-    <EmbeddedResource Remove="BUILD\**" />
-    <None Remove="BUILD\**" />
+    <ItemGroup>
+        <Compile Remove="BUILD\**" />
+        <EmbeddedResource Remove="BUILD\**" />
+        <None Remove="BUILD\**" />
 
-    <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
 
-    <PackageReference Include="AutomaticInterface" Version="2.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="DryIoc" Version="5.4.3" />
-    <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove=".git" />
-    <None Remove=".gitignore" />
-  </ItemGroup>
-
-  <Choose>
-    <When Condition="'$(SolutionName)'=='S4ModdingFramework'">
-      <ItemGroup>
-        <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj">
-	        <HintPath>S4APIWrapper.asi</HintPath>
-		</ProjectReference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="S4APIWrapper" Version="0.4.1">
-	        <HintPath>S4APIWrapper.asi</HintPath>
+        <PackageReference Include="AutomaticInterface" Version="2.3.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
+
+        <PackageReference Include="DryIoc" Version="5.4.3" />
+        <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove=".git" />
+        <None Remove=".gitignore" />
+    </ItemGroup>
+
+    <Choose>
+        <When Condition="'$(SolutionName)'=='S4ModdingFramework'">
+            <ItemGroup>
+                <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj">
+                    <HintPath>S4APIWrapper.asi</HintPath>
+                </ProjectReference>
+            </ItemGroup>
+        </When>
+        <Otherwise>
+            <ItemGroup>
+                <PackageReference Include="S4APIWrapper" Version="0.5.0">
+                    <HintPath>S4APIWrapper.asi</HintPath>
+                </PackageReference>
+            </ItemGroup>
+        </Otherwise>
+    </Choose>
 </Project>
