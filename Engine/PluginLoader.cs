@@ -15,8 +15,6 @@ using System.Text.Json.Serialization;
 
 namespace Forge.Engine {
     internal static class PluginLoader {
-        const string PluginExtension = "*.nasi";
-
         class PluginInfo {
             internal const string ConfigFileName = "plugin.cfg";
 
@@ -25,6 +23,12 @@ namespace Forge.Engine {
             /// </summary>
             [JsonPropertyName("name")]
             public required string Name { get; set; }
+
+            /// <summary>
+            /// The name of the .NET assembly file that contains the plugin implementations.
+            /// </summary>
+            [JsonPropertyName("entryPoint")]
+            public required string EntryPoint { get; set; }
 
             /// <summary>
             /// The version of the plugin.
@@ -94,7 +98,7 @@ namespace Forge.Engine {
                 // Load config file
                 PluginInfo pluginInfo;
                 try {
-                    pluginInfo = JsonSerializer.Deserialize<PluginInfo>(File.ReadAllText(configFilePath), jsonSerializerOptions);
+                    pluginInfo = JsonSerializer.Deserialize<PluginInfo>(File.ReadAllText(configFilePath), jsonSerializerOptions) ?? throw new SerializationException("Failed to deserialize plugin config file.");
                 } catch (Exception e) {
                     Logger.LogError(e, $"Error during load of config file '{configFilePath}'");
                     continue;
@@ -137,24 +141,18 @@ namespace Forge.Engine {
 
 
                     // Check if plugin assembly exists
-                    string[] pluginFiles = Directory.GetFiles(directory, PluginExtension);
-                    switch (pluginFiles.Length) {
-                        case 0:
-                            Logger.LogError(null, $"Plugin '{directory}' is missing a plugin assembly.");
-                            continue;
-                        case > 1:
-                            Logger.LogError(null, $"Plugin '{directory}' has multiple plugin assemblies.");
-                            continue;
+                    string pluginPath = Path.Combine(directory, plugin.EntryPoint);
+                    if (!File.Exists(pluginPath)) {
+                        Logger.LogWarn("Plugin {0} is missing it's entry point assembly: '{1}'.", plugin.Name, pluginPath);
+                        continue;
                     }
-
-                    string pluginFile = pluginFiles[0];
 
                     Logger.LogInfo($"Loading Plugin '{plugin.Name}'...");
 
                     AssemblyInitializations.AddFolderLoadSource(directory);
                     AssemblyInitializations.AddFolderLoadSource(Path.Combine(directory, PluginLibFolder));
 
-                    LoadPlugin(dependencies, pluginFile);
+                    LoadPlugin(dependencies, pluginPath);
                 } catch (Exception e) {
                     string stackTrace = e.StackTrace;
                     while (e.InnerException != null) {
