@@ -72,40 +72,14 @@ namespace Forge {
 #endif
             Logger.LogError(exception, "Forge detected an unhandled exception");
 
-            StackTrace trace = new StackTrace(exception);
-
-            IDebugReporter crashReporter = DebugService.GetReporter();
-            crashReporter.AddPropertyToReport("ManagedTrace", exception.StackTrace);
-
-
-            Assembly[] pluginAssemblies = PluginLoader.GetActivePluginAssemblies().ToArray();
-            Assembly? exceptionAssembly = null;
-
-            for (int i = 0; i < trace.FrameCount; i++) {
-                StackFrame frame = trace.GetFrame(i)!;
-                MethodBase? method = frame.GetMethod();
-                Assembly? declaringTypeAssembly = method?.DeclaringType?.Assembly;
-                if (declaringTypeAssembly == null)
-                    continue;
-
-                if (pluginAssemblies.Contains(declaringTypeAssembly)) {
-                    exceptionAssembly = declaringTypeAssembly;
-                    break;
-                }
-            }
-
-            if (exceptionAssembly == null) return;
-
             DebugReportSource source = new DebugReportSource();
 
             string exceptionMessage = "";
             // TODO: Add custom exception handling for plugins
             // Probably in form of a custom class in the plugin assembly that implements ICrashReporter
 
-            // TODO: Improve stack trace handling with native stack
-
-            crashReporter.ReportCrash(source, exceptionMessage);
-            return;
+            IDebugReporter crashReporter = DebugService.GetReporter();
+            crashReporter.ReportException(source, exceptionMessage, exception, true);
         }
 
     }
