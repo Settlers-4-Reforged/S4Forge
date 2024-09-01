@@ -1,4 +1,6 @@
-﻿using Forge.Config;
+﻿using AutomaticInterface;
+
+using Forge.Config;
 
 using System;
 using System.Collections.Generic;

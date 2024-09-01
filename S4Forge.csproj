@@ -45,13 +45,13 @@
 
         <None Include="README.md" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="AutomaticInterface" Version="2.3.0">
+        <PackageReference Include="AutomaticInterface" Version="4.1.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
-        <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.1.1" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitLab" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>

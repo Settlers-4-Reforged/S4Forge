@@ -1,4 +1,5 @@
 ﻿using Forge.Config;
+﻿using AutomaticInterface;
 using Forge.S4.Game;
 
 using System;

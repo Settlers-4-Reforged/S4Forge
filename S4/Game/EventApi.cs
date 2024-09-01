@@ -1,4 +1,6 @@
-﻿using Forge.Config;
+﻿using AutomaticInterface;
+
+using Forge.Config;
 using Forge.Native;
 using Forge.S4.Types;
 using Forge.S4.Types.Native;
