@@ -1,5 +1,8 @@
-﻿using Forge.Config;
 ﻿using AutomaticInterface;
+
+using DryIoc;
+
+using Forge.Config;
 using Forge.S4.Game;
 
 using System;
@@ -7,19 +10,23 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Forge.S4.Types {
+
+    public partial interface IPlayer { }
+
     [GenerateAutomaticInterface]
     internal class Player : IPlayer {
-        const int PlayerCount = 8;
-        private static readonly Player?[] players = new Player?[PlayerCount];
-        public static Player FromId(uint id) => players[id] ??= new Player(id);
+        private const int PlayerCount = 8;
 
-        public Player() {
-            Id = Forge.Native.ModAPI.API.GetLocalPlayer();
+        internal static void RegisterPlayers() {
+            for (uint i = 0; i < PlayerCount; i++) {
+                uint id = i;
+                DI.Dependencies.Register<IPlayer, Player>(serviceKey: i, made: Made.Of(() => new Player(id)));
+            }
         }
 
-        public Player(uint id) => Id = id;
+        private Player(uint id) => Id = id;
 
-        public uint Id { get; private set; }
+        public uint Id { get; protected set; }
 
         public bool IsLocalPlayer => Id == Forge.Native.ModAPI.API.GetLocalPlayer();
 
@@ -28,8 +35,6 @@ namespace Forge.S4.Types {
 
         public Tribe Tribe => (Tribe)Forge.Native.ModAPI.API.GetPlayerTribe(Id);
 
-
         public bool HasLost => Forge.Native.ModAPI.API.HasPlayerLost(Id) != 0;
-
     }
 }

@@ -96,6 +96,7 @@ namespace Forge.S4.Types {
         SelectionSubStorage,
         SelectionSubBuildVehicle,
         SelectionSubBarracks,
+        ConfirmDestroy,
 
         Max // never put anything below this
     };

@@ -1,52 +1,29 @@
-﻿using Forge.Config;
 ﻿using AutomaticInterface;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Forge.Config;
+using Forge.Logging;
+using Forge.Native;
+using Forge.S4.Game;
 
 namespace Forge.S4.Types {
     [GenerateAutomaticInterface]
     public class World : IWorld {
-        public uint Size => Forge.Native.ModAPI.API.MapSize();
-
-        public struct Resource {
-            public ResourceType Type { get; set; }
-
-            /// <summary>
-            /// The amount of the resource available in the tile.
-            /// </summary>
-            /// <remarks>
-            /// This value is between 1 and 16.
-            /// For resource types like tree, this value is 1.
-            /// </remarks>
-            public int Level { get; set; }
-
-            internal S4_RESOURCE_ENUM ToNative() {
-                if (Level == 0) {
-                    return 0;
-                }
-
-                return (S4_RESOURCE_ENUM)((int)Type + Level - 1);
-            }
-        }
+        public uint Size => ModAPI.API.MapSize();
 
         public uint GetTileHeightAt(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeGetHeight(x, y);
+            return ModAPI.API.LandscapeGetHeight(x, y);
         }
 
         public uint GetTileTypeAt(int x, int y) {
-            return (uint)Forge.Native.ModAPI.API.LandscapeGetType(x, y);
+            return (uint)ModAPI.API.LandscapeGetType(x, y);
         }
 
         public bool IsTilePond(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeIsPond(x, y) == 1;
+            return ModAPI.API.LandscapeIsPond(x, y) == 1;
         }
 
         public Resource? GetTileResourceAt(int x, int y) {
-            int resourceAndLevel = (int)Forge.Native.ModAPI.API.LandscapeGetResource(x, y);
+            int resourceAndLevel = (int)ModAPI.API.LandscapeGetResource(x, y);
 
             switch (resourceAndLevel) {
                 case 0:
@@ -81,23 +58,26 @@ namespace Forge.S4.Types {
             }
 
             // This should never happen:
+            Logger.LogWarn("Unknown resource type: " + resourceAndLevel);
+
             return null;
         }
 
         public int SetTileResourceAt(int x, int y, Resource resource) {
-            return Forge.Native.ModAPI.API.LandscapeSetResource(x, y, resource.ToNative());
+            return ModAPI.API.LandscapeSetResource(x, y, resource.ToNative());
         }
 
         public IPlayer GetTileOwnerAt(int x, int y) {
-            return Player.FromId(Forge.Native.ModAPI.API.LandscapeGetOwner(x, y));
+            uint owner = ModAPI.API.LandscapeGetOwner(x, y);
+            return DI.Resolve<IPlayerApi>().GetPlayer(owner);
         }
 
         public bool IsTileOccupied(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeIsOccupied(x, y) != 0;
+            return ModAPI.API.LandscapeIsOccupied(x, y) != 0;
         }
 
         public bool IsTileFoundingStone(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeIsFoundingStone(x, y) != 0;
+            return ModAPI.API.LandscapeIsFoundingStone(x, y) != 0;
         }
 
         /// <summary>
@@ -107,7 +87,7 @@ namespace Forge.S4.Types {
         /// This flag is mutually exclusive with <see cref="IsTileDarkLand"/>. If a tile is a dark land border, it is not marked as dark land.
         /// </remarks>
         public bool IsTileDarkLandBorder(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeIsDarkLandBorder(x, y) != 0;
+            return ModAPI.API.LandscapeIsDarkLandBorder(x, y) != 0;
         }
 
         /// <summary>
@@ -117,7 +97,7 @@ namespace Forge.S4.Types {
         /// This flag is mutually exclusive with <see cref="IsTileDarkLandBorder"/>. If a tile is a dark land border, it is not marked as dark land.
         /// </remarks>
         public bool IsTileDarkLand(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeIsDarkLand(x, y) != 0;
+            return ModAPI.API.LandscapeIsDarkLand(x, y) != 0;
         }
 
         /// <summary>
@@ -125,11 +105,33 @@ namespace Forge.S4.Types {
         /// </summary>
         /// <returns>A value between [0,1.0]</returns>
         public float GetTileFogOfWar(int x, int y) {
-            return Forge.Native.ModAPI.API.LandscapeGetFogOfWar(x, y) / 255.0f;
+            return ModAPI.API.LandscapeGetFogOfWar(x, y) / 255.0f;
         }
 
         public IEcoSector GetEcoSectorAt(int x, int y) {
-            return new EcoSector(Forge.Native.ModAPI.API.LandscapeGetEcoSector(x, y));
+            return new EcoSector(ModAPI.API.LandscapeGetEcoSector(x, y));
+        }
+    }
+
+
+    public struct Resource {
+        public ResourceType Type { get; set; }
+
+        /// <summary>
+        /// The amount of the resource available in the tile.
+        /// </summary>
+        /// <remarks>
+        /// This value is between 1 and 16.
+        /// For resource types like tree, this value is 1.
+        /// </remarks>
+        public int Level { get; set; }
+
+        internal S4_RESOURCE_ENUM ToNative() {
+            if (Level == 0) {
+                return 0;
+            }
+
+            return (S4_RESOURCE_ENUM)((int)Type + Level - 1);
         }
     }
 }

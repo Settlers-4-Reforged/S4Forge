@@ -1,5 +1,7 @@
 ﻿using AutomaticInterface;
 
+using DryIoc;
+
 using Forge.Config;
 using Forge.Native;
 using Forge.S4.Types;
@@ -17,22 +19,19 @@ namespace Forge.S4.Game {
         }
 
         public IPlayer GetPlayer(uint id) {
-            return Player.FromId(id);
+            if (id >= GetNumberOfPlayers()) {
+                throw new ArgumentOutOfRangeException(nameof(id), id, "Player ID out of range");
+            }
+
+            return DI.Dependencies.Resolve<IPlayer>(serviceKey: id);
         }
 
         public IPlayer GetLocalPlayer() {
             return GetPlayer(GetLocalPlayerId());
         }
 
-        // TODO: Add mapping to a Player object, that contains more information about the player
         public uint GetLocalPlayerId() {
             return ModAPI.API.GetLocalPlayer();
-        }
-
-        public Tribe GetCurrentTribe() {
-            uint player = GetLocalPlayerId();
-
-            return (Tribe)ModAPI.API.GetPlayerTribe(player);
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Forge.S4.Game {
 
     [GenerateAutomaticInterface]
-    internal class GfxEngineApi : IGfxEngineApi {
+    internal sealed class GfxEngineApi : IGfxEngineApi {
         public GfxEngineApi() {
 
         }
