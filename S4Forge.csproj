@@ -45,12 +45,16 @@
 
         <None Include="README.md" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="AutomaticInterface" Version="4.1.0">
+        <PackageReference Include="AutomaticInterface" Version="5.0.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
+
+        <PackageReference Include="ForgeUpdaterManifest" Version="0.2.0">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.SourceLink.GitLab" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
 
