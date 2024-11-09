@@ -52,7 +52,7 @@
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
 
-        <PackageReference Include="ForgeUpdaterManifest" Version="0.2.0">
+        <PackageReference Include="ForgeUpdaterManifest" Version="0.3.1">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.SourceLink.GitLab" Version="8.0.0" PrivateAssets="All" />
@@ -73,7 +73,7 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="S4APIWrapper" Version="0.6.*">
+                <PackageReference Include="S4APIWrapper" Version="0.7.*">
                     <HintPath>S4APIWrapper.asi</HintPath>
                 </PackageReference>
             </ItemGroup>
