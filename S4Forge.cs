@@ -71,10 +71,11 @@ namespace Forge {
         private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
             Exception exception = (Exception)e.ExceptionObject;
 
-#if DEBUG
-            User32.MessageBox("Forge detected an unhandled managed exception and is now halting execution.\nEither attach a debugger, or ignore this error", "S4Forge");
-#endif
             Logger.LogError(exception, "Forge detected an unhandled exception");
+
+#if DEBUG
+            User32.MessageBox($"Forge detected an unhandled managed exception and is now halting execution.\n{exception.Message}\nEither attach a debugger, or ignore this error", "S4Forge");
+#endif
 
             DebugReportSource source = new DebugReportSource();
 
