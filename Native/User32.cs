@@ -54,7 +54,7 @@ namespace Forge.Native {
                     if (winMains == null) return 0;
                     foreach (WndProcDelegate winMain in winMains) {
                         if (winMain((WndProcMsg)msg, new UIntPtr(param), new UIntPtr((uint)lParam))) {
-                            return 0;
+                            return 1;
                         }
                     }
 
