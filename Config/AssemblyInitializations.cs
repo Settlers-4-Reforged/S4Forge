@@ -3,6 +3,7 @@ using Forge.Native;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -88,7 +89,12 @@ namespace Forge.Config {
                     return Assembly.LoadFrom(path);
                 }
 
-                Logger.LogError(null, $"Failed to find assembly {assemblyName} in any of the following folders:\n{string.Join("\n", searchedFolders)}");
+                string extraInfo = "";
+#if DEBUG
+                extraInfo = "\n#####################\n" + new StackTrace().ToString();
+#endif
+
+                Logger.LogError(null, $"Failed to find assembly {assemblyName} in any of the following folders:\n{string.Join("\n", searchedFolders)}{extraInfo}");
 
                 return null;
             };
