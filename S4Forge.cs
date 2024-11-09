@@ -50,11 +50,15 @@ namespace Forge {
                 Logger.LogInfo($"Finished initializing \"{engine.Name}\"...");
             }
 
+            ApiManager.ResolveDependencies();
+
             if (!PluginLoader.LoadAllPlugins(DI.Dependencies)) {
                 Logger.LogError(null, "There was an error during the loading of a (or all) plugins");
             } else {
                 Logger.LogInfo("Finished loading all plugins");
             }
+
+            PluginLoader.InformPluginsLoadedCallbacks(DI.Dependencies);
 
             Logger.LogInfo("Finished initializing Forge");
         }

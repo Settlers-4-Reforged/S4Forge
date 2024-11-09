@@ -19,7 +19,7 @@ namespace Forge.S4.Game {
 
         public void SendEvent(EventType type, uint wparam, uint lparam, sbyte unknown) {
             unsafe {
-                Event newEvent;
+                CEvent newEvent;
                 void* s4event = ModAPI.API.CreateS4Event(&newEvent, (uint)type, wparam, lparam, unknown);
                 ModAPI.API.PostToMessageQueue(EventManager, s4event);
             }

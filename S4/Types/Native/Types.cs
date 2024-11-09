@@ -1,7 +1,10 @@
-﻿using System;
+using Forge.S4.Types;
+using Forge.S4.Types.Native.Helpers;
 
-namespace Forge.S4.Types {
-    public enum Team {
+namespace Forge.S4.Types.Native
+{
+    public enum Team
+    {
         Red = 0,
         Blue,
         Green,
@@ -13,123 +16,30 @@ namespace Forge.S4.Types {
         Max,
     }
 
-    public enum Tribe {
+    public enum Tribe
+    {
         Roman = 0,
         Viking,
         Maya,
         Dark,
         Trojan,
         Default = -1,
+        None = 255,
+        Any = 254,
     }
 
-    public enum EntityClass : byte {
+    public enum PersistentRole : byte
+    {
         Unknown,
-
-        Building,
-        Pile,
-
-        // Ground Mobile Entities
-        // Settler
-        Settler,
-        // Animal
-        Landanimal,
-        // Vehicles
-        // Wheelers
-        Cart,
-        // Catapult
-        CatapultMaya,
-        CatapultTrojan,
-        CatapultRoman,
-        CatapultViking,
-        // Ships
-        Ferry,
-        Transportship,
-        // War Ship
-        WarshipMaya,
-        WarshipTrojan,
-        WarshipRoman,
-        WarshipViking,
-
-        // Flying Mobile Entites
-        Manakopter,
-
-        // Stationary Deco Entities
-        Deco,
-        Hive,
-        Mushroom,
-        Plant,
-        ShadowHerb,
-        Stone,
-        Tree,
-    };
-
-    public enum GroundType : byte {
-        Water1 = 0, // water1 does only exist without waves (it ignores the pond flag)
-        Water2 = 1, // this ground respects the pond flag
-        Water3 = 2, // this ground respects the pond flag
-        Water4 = 3, // this ground respects the pond flag
-        Water5 = 4, // this ground respects the pond flag
-        Water6 = 5, // this ground respects the pond flag
-        Water7 = 6, // this ground respects the pond flag
-        Water8 = 7, // deep sea, this ground respects the pond flag
-        Grass = 16,
-        GrassRock = 17, // transition triangles only: grass grass rock
-        GrassIsle = 18,
-        GrassDesert = 20, // transition triangles only: grass grass desert
-        GrassSwamp = 21, // transition triangles only: grass grass swamp
-        GrassMud = 23,  // transition triangles only: grass grass mud
-        Darkgrass = 24,
-        DarkgrassGrass = 25, // transition triangles only: darkgrass darkgrass grass
-        Sandyroad = 28,
-        Cobbledroad = 29,
-        Rock = 32,
-        RockGrass = 33, // transition triangles only: rock rock grass
-        RockSnow = 35, // transition triangles only: rock rock snow
-        Beach = 48,
-        Desert = 64,
-        DesertGrass = 65, // transition triangles only: desert desert grass
-        Swamp = 80,
-        SwampGrass = 81, // transition triangles only: swamp swamp grass
-        River1 = 96,
-        River2 = 97,
-        River3 = 98,
-        River4 = 99,
-        Snow = 128,
-        SnowRock = 129,  // transition triangles only: snow snow rock
-        Mud = 144,
-        MudGrass = 145,  // transition triangles only: mud mud grass
-    };
-
-    public enum ResourceType : byte {
-        None,
-        Fish,
-        Coal = Fish + 16,
-        Iron = Coal + 16,
-        Gold = Iron + 16,
-        Sulfur = Gold + 16,
-        DeepStone = Sulfur + 16,
-        Stone = DeepStone + 16,
-        Tree = Stone + 16,
-    };
-
-    // Roles define what an entity "does" or is destined for. You may create custom 
-    // roles for entities. Just make sure to implement the proper Role interface for 
-    // the entity type (building/pile/settler) you wish to program.
-    public enum EntityRole : byte {
-        Unknown,
-
-        // Pile Roles
         PileAnywhere,
         PileBuildingSite,
         PileDelivery,
         PileProduction,
         PileStorage,
         PileTrade,
-
-        // Building Roles
-        BuildingWorkup,  // needs confirmation
+        BuildingWorkup,
         BuildingAnimalranch,
-        BuildingMilitary, // needs confirmation
+        BuildingMilitary,
         BuildingCastle,
         BuildingTrading,
         BuildingBarrack,
@@ -149,8 +59,6 @@ namespace Forge.S4.Types {
         BuildingSmalltemple,
         BuildingStorage,
         BuildingWorkshop,
-
-        // Settler Roles
         SettlerBuilder,
         SettlerCarrier,
         SettlerDarkgardener,
@@ -164,26 +72,157 @@ namespace Forge.S4.Types {
         SettlerMushroomfarmer,
         SettlerSlave,
         SettlerTowersoldier,
-
-        // The following are selectables
         SettlerGardener,
         SettlerGeologist,
         SettlerPioneer,
         SettlerPriest,
         SettlerThief,
-
-        // The following roles have a WarriorBehaviour attached. Note that 
-        // war machines/ships do not have a role but inherit directly from WarriorBehaviour!
         SettlerSoldier,
-        SettlerSquadleader,  // needs confirmation
-        SettlerHjb,  // needs confirmation
+        SettlerSquadleader,
+        SettlerHjb,
         SettlerShaman,
         SettlerSaboteur,
-    };
+    }
 
-    public enum GoodType : byte {
+    public enum EntityClass : byte
+    {
+        Unknown,
+        Building,
+        Pile,
+        Settler,
+        Landanimal,
+        Cart,
+        CatapultMaya,
+        CatapultTrojan,
+        CatapultRoman,
+        CatapultViking,
+        Ferry,
+        Transportship,
+        WarshipMaya,
+        WarshipTrojan,
+        WarshipRoman,
+        WarshipViking,
+        Manakopter,
+        Deco,
+        Hive,
+        Mushroom,
+        Plant,
+        ShadowHerb,
+        Stone,
+        Tree,
+    }
+
+    public enum GroundType : byte
+    {
+        Water1 = 0,
+        Water2 = 1,
+        Water3 = 2,
+        Water4 = 3,
+        Water5 = 4,
+        Water6 = 5,
+        Water7 = 6,
+        Water8 = 7,
+        Grass = 16,
+        GrassRock = 17,
+        GrassIsle = 18,
+        GrassDesert = 20,
+        GrassSwamp = 21,
+        GrassMud = 23,
+        Darkgrass = 24,
+        DarkgrassGrass = 25,
+        Sandyroad = 28,
+        Cobbledroad = 29,
+        Rock = 32,
+        RockGrass = 33,
+        RockSnow = 35,
+        Beach = 48,
+        Desert = 64,
+        DesertGrass = 65,
+        Swamp = 80,
+        SwampGrass = 81,
+        River1 = 96,
+        River2 = 97,
+        River3 = 98,
+        River4 = 99,
+        Snow = 128,
+        SnowRock = 129,
+        Mud = 144,
+        MudGrass = 145,
+    }
+
+    public enum ResourceType : byte
+    {
+        None,
+        Fish,
+        Coal = Fish + 16,
+        Iron = Coal + 16,
+        Gold = Iron + 16,
+        Sulfur = Gold + 16,
+        DeepStone = Sulfur + 16,
+        Stone = DeepStone + 16,
+        Tree = Stone + 16,
+    }
+
+    public enum EntityRole : byte
+    {
+        Unknown,
+        PileAnywhere,
+        PileBuildingSite,
+        PileDelivery,
+        PileProduction,
+        PileStorage,
+        PileTrade,
+        BuildingWorkup,
+        BuildingAnimalranch,
+        BuildingMilitary,
+        BuildingCastle,
+        BuildingTrading,
+        BuildingBarrack,
+        BuildingBigtemple,
+        BuildingSite,
+        BuildingMushroomfarm,
+        BuildingDarktemple,
+        BuildingEyecatcher,
+        BuildingFarm,
+        BuildingGather,
+        BuildingLookouttower,
+        BuildingManakopterhall,
+        BuildingMine,
+        BuildingProduction,
+        BuildingResidence,
+        BuildingSimple,
+        BuildingSmalltemple,
+        BuildingStorage,
+        BuildingWorkshop,
+        SettlerBuilder,
+        SettlerCarrier,
+        SettlerDarkgardener,
+        SettlerDigger,
+        SettlerDonkey,
+        SettlerDoor,
+        SettlerFlee,
+        SettlerFreeworker,
+        SettlerHouseworker,
+        SettlerHunter,
+        SettlerMushroomfarmer,
+        SettlerSlave,
+        SettlerTowersoldier,
+        SettlerGardener,
+        SettlerGeologist,
+        SettlerPioneer,
+        SettlerPriest,
+        SettlerThief,
+        SettlerSoldier,
+        SettlerSquadleader,
+        SettlerHjb,
+        SettlerShaman,
+        SettlerSaboteur,
+    }
+
+    public enum GoodType : byte
+    {
         None = 0,
-        Agave, // good id 1
+        Agave,
         Ammo,
         Armor,
         Axe,
@@ -192,7 +231,7 @@ namespace Forge.S4.Types {
         Board,
         Bow,
         Bread,
-        Coal, // 10
+        Coal,
         Fish,
         Flour,
         Goat,
@@ -202,7 +241,7 @@ namespace Forge.S4.Types {
         Gunpowder,
         Hammer,
         Honey,
-        Ironbar,// 20
+        Ironbar,
         Ironore,
         Log,
         Mead,
@@ -212,7 +251,7 @@ namespace Forge.S4.Types {
         Rod,
         Saw,
         Scythe,
-        Sheep, // 30
+        Sheep,
         Shovel,
         Stone,
         Sulfur,
@@ -222,16 +261,15 @@ namespace Forge.S4.Types {
         Wine,
         Backpackcatapult,
         Goose,
-        Explosivearrow, // 40
+        Explosivearrow,
         Sunfloweroil,
-        Sunflower, // good id 42
-    };
+        Sunflower,
+    }
 
-    public enum BuildingType : byte {
+    public enum BuildingType : byte
+    {
         None = 0,
-        //S4_BUILDING_READY,
-        //S4_BUILDING_UNDERCONSTRUCTION,
-        Woodcutterhut, // building id 1
+        Woodcutterhut,
         Foresterhut,
         Sawmill,
         Stonecutterhut,
@@ -240,7 +278,7 @@ namespace Forge.S4.Types {
         Hunterhut,
         Slaughterhouse,
         Mill,
-        Bakery, // 10
+        Bakery,
         Grainfarm,
         Animalranch,
         Donkeyranch,
@@ -250,7 +288,7 @@ namespace Forge.S4.Types {
         Coalmine,
         Sulfurmine,
         Smeltgold,
-        Smeltiron, // 20
+        Smeltiron,
         Toolsmith,
         Weaponsmith,
         Vehiclehall,
@@ -260,7 +298,7 @@ namespace Forge.S4.Types {
         Healerhut,
         Ammomakerhut,
         Gunpowdermakerhut,
-        Landscapemakerhut, // 30
+        Landscapemakerhut,
         Shipyard,
         Port,
         Marketplace,
@@ -270,7 +308,7 @@ namespace Forge.S4.Types {
         Tequilamakerhut,
         Beekeeperhut,
         Meadmakerhut,
-        Residencesmall,// 40
+        Residencesmall,
         Residencemedium,
         Residencebig,
         Smalltemple,
@@ -280,7 +318,7 @@ namespace Forge.S4.Types {
         Guardtowerbig,
         Castle,
         Mushroomfarm,
-        Darktemple, // 50
+        Darktemple,
         Fortress,
         Porta,
         Portb,
@@ -313,11 +351,12 @@ namespace Forge.S4.Types {
         Manacopterhall,
         Sunfloweroilmakerhut,
         Sunflowerfarmerhut,
-    };
+    }
 
-    public enum SettlerType : byte {
+    public enum SettlerType : byte
+    {
         None = 0,
-        Carrier, // settler id 1
+        Carrier,
         Digger,
         Builder,
         Woodcutter,
@@ -385,51 +424,53 @@ namespace Forge.S4.Types {
         Sunflowerfarmer,
         Sunfloweroilmaker,
         Manacoptermaster,
+        Unk68 = 68,
+        Unk69 = 69,
+    }
 
-        Unk68 = 68, // The first 6 entities of a game are this. Maybe the spawn flags set in the editor?
-        Unk69 = 69, // Probably door swordman of a tower
-    };
-
-    public enum AnimalType : byte {
+    public enum AnimalType : byte
+    {
         None = 0,
         Hog = 1,
-        Bug1 = 2, // unconfirmed, is it an IEntity?
-        Bug2 = 3, // unconfirmed, is it an IEntity?
+        Bug1 = 2,
+        Bug2 = 3,
         DeerFemale = 4,
         DeerMale = 5,
         Fox = 6,
-        Chicken = 7, // unconfirmed, is it an IEntity?
-        Jaguar = 8, // unconfirmed
+        Chicken = 7,
+        Jaguar = 8,
         BunnyRed = 9,
-        Dolphin = 10, // unconfirmed, probably not an IEntity
-        SeaMonster = 11, // unconfirmed, probably not an IEntity
-        Shark = 12, // unconfirmed, probably not an IEntity
-        Bear = 13, // unconfirmed
-        Wolf = 14, // unconfirmed
-        Fish = 15, // unconfirmed, probably not an IEntity
+        Dolphin = 10,
+        SeaMonster = 11,
+        Shark = 12,
+        Bear = 13,
+        Wolf = 14,
+        Fish = 15,
         BunnyGray = 16,
-        Bull = 17, // unconfirmed
-        Seagul = 0, // unknown, probably an effect?
-        Donkey = 0, // unknown, probably an ISettler?
-        Butterfly1 = 0, // unknown, probably an effect?
-        Butterfly2 = 0, // unknown, probably an effect?
-        Butterfly3 = 0, // unknown, probably an effect?
-        DuckMale = 0,  // unknown, probably an effect?
-        DuckFemale = 0,  // unknown, probably an effect?
-        Parrot = 0,  // unknown, probably an effect?
-    };
+        Bull = 17,
+        Seagul = 0,
+        Donkey = 0,
+        Butterfly1 = 0,
+        Butterfly2 = 0,
+        Butterfly3 = 0,
+        DuckMale = 0,
+        DuckFemale = 0,
+        Parrot = 0,
+    }
 
-    public enum VehicleType : byte {
+    public enum VehicleType : byte
+    {
         None = 0,
-        Warship, // vehicle id 1
+        Warship,
         Ferry,
         Transportship,
         Warmachine,
         Cart,
         FoundationCart,
-    };
+    }
 
-    public enum TreeType : byte {
+    public enum TreeType : byte
+    {
         None = 0,
         Oak = 1,
         Beech = 2,
@@ -449,8 +490,6 @@ namespace Forge.S4.Types {
         Pine2 = 16,
         OliveLarge = 17,
         OliveSmall = 18,
-
-        // Trees the tribes grow
         Roman1 = Fir,
         Roman2 = Spruce,
         Viking1 = Fir,
@@ -461,13 +500,15 @@ namespace Forge.S4.Types {
         Trojan2 = Pine2,
         Trojan3 = OliveLarge,
         Trojan4 = OliveSmall,
-    };
+    }
 
-    enum SoundType : uint {
+    public enum SoundType : byte
+    {
         None = 0,
-    };
+    }
 
-    enum SpellType : byte {
+    public enum SpellType : byte
+    {
         SpellNone = 0,
         Spell1,
         Spell2,
@@ -477,6 +518,5 @@ namespace Forge.S4.Types {
         Spell6,
         Spell7,
         Spell8,
-    };
-
+    }
 }

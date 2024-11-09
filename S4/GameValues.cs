@@ -21,11 +21,15 @@ namespace Forge.S4 {
 
         public static int S4_Main { get; private set; }
 
-        public static T ReadValue<T>(int address, bool relative = true) where T : unmanaged {
+        public static T ReadValue<T>(int address, bool relative = true, T @default = default(T)) where T : unmanaged {
             int pointer = address + (relative ? S4_Main : 0);
 
             unsafe {
                 T* value = (T*)new IntPtr(pointer).ToPointer();
+
+                if (value == null) {
+                    return @default;
+                }
 
                 return *value;
             }

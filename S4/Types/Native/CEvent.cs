@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Forge.S4.Types.Native {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-    public unsafe struct Event {
+    public unsafe struct CEvent {
         void* __vftable /*VFT*/;
         EventType eventType;
         uint wparam;
