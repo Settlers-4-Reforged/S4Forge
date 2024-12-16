@@ -6,6 +6,7 @@ using Forge.Native;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -134,7 +135,7 @@ namespace Forge.Engine {
                     AssemblyInitializations.AddFolderLoadSource(directory);
                     AssemblyInitializations.AddFolderLoadSource(Path.Combine(directory, PluginLibFolder));
 
-                    LoadPlugin(dependencies, pluginPath);
+                    LoadPlugin(dependencies, pluginPath, directory);
                 } catch (Exception e) {
                     string stackTrace = e.StackTrace;
                     while (e.InnerException != null) {
@@ -173,7 +174,7 @@ namespace Forge.Engine {
             return true;
         }
 
-        private static void LoadPlugin(Container dependencies, string file) {
+        private static void LoadPlugin(Container dependencies, string file, string directory) {
             string msg = $"Loading Plugin Assembly '{file}'...";
             Logger.LogInfo(msg);
 
@@ -197,6 +198,21 @@ namespace Forge.Engine {
             foreach (Type pluginType in pluginTypes) {
                 Logger.LogInfo($"Found Plugin '{pluginType.Name}'");
                 dependencies.RegisterMany(new[] { pluginType }, Reuse.Singleton);
+
+                // Register the plugins environment too:
+                try {
+                    Type pluginEnvironmentType = typeof(PluginEnvironment<>).MakeGenericType(pluginType);
+
+                    // Normalize path and enforce trailing slash
+                    string pluginPath = Path.GetFullPath(directory, Environment.CurrentDirectory).TrimEnd('\\', '/') + "\\";
+
+                    // The environment has to instantiated here, just so it's easier to fill in any required parameters
+                    object pluginEnvironment = Activator.CreateInstance(pluginEnvironmentType, BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { pluginPath }, CultureInfo.InvariantCulture)!;
+                    dependencies.RegisterInstance(pluginEnvironmentType, pluginEnvironment, IfAlreadyRegistered.Throw);
+                } catch (Exception e) {
+                    Logger.LogError(e, $"Failed to register Plugin Environment for '{pluginType.Name}'");
+                    throw; // This is an indication that something much bigger is wrong, so just add a log and continue the throw
+                }
             }
         }
 
