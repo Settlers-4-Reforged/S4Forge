@@ -38,8 +38,7 @@ namespace Forge.Logging {
         }
 
         private static string GetEngineSource(Assembly caller) {
-            Type? engine = ModuleLoader.GetIEngine(caller);
-            return engine == null ? "Generic" : engine.Name;
+            return caller.GetName().Name ?? "Generic";
         }
 
         public static PrivateLogger CreateLogger(string name) {
