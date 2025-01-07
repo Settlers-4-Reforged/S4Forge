@@ -23,7 +23,7 @@ namespace Forge.S4.Types.Native.Entities
         public IEntity.EntityType entityType;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk0;
+        public byte pad_b;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -31,7 +31,7 @@ namespace Forge.S4.Types.Native.Entities
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("BYTE[6]")]
-        public fixed byte unk1[6];
+        public fixed byte unk_e[6];
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("enum BaseType")]
@@ -41,10 +41,10 @@ namespace Forge.S4.Types.Native.Entities
         public byte selectionFlags;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk2;
+        public byte unk_16;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk3;
+        public byte unk_17;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -55,21 +55,27 @@ namespace Forge.S4.Types.Native.Entities
         public ushort y;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("DWORD")]
-        public uint unk5;
+        public byte unk_1c;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("__AnonymousRecord_entities_L108_C17")]
+        public byte unk_1d;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("WORD")]
+        public ushort unk_1e;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("__AnonymousRecord_entities_L110_C17")]
         public IEntity._Anonymous_e__Struct Anonymous;
 
         [NativeInheritance(nameof(IEntity))]
         public byte health;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad0;
+        public byte pad_22;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad1;
+        public byte pad_23;
 
         public byte tribe
         {
@@ -102,36 +108,36 @@ namespace Forge.S4.Types.Native.Entities
         }
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public byte unk6;
+        public byte animationFrameIndex;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public byte unk7;
-
-        [NativeInheritance(nameof(IAnimatedEntity))]
-        [NativeTypeName("WORD")]
-        public ushort unk8;
+        public byte unk_25;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("WORD")]
-        public ushort unk9;
+        public ushort unk_26;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("WORD")]
-        public ushort unk10;
+        public ushort nextEntity;
+
+        [NativeInheritance(nameof(IAnimatedEntity))]
+        [NativeTypeName("WORD")]
+        public ushort prevEntity;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk11;
+        public uint globalTick;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk12;
+        public uint unk_30;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public int unk13;
+        public int unk_34;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public int unk14;
+        public int unk_38;
 
         [NativeInheritance(nameof(IDecoObject))]
         [NativeTypeName("DWORD")]
@@ -189,7 +195,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(6)]
         [return: NativeTypeName("DWORD")]
-        public uint vfunc6(int param0)
+        public uint PopulateRenderData(int param0)
         {
             return ((delegate* unmanaged[Thiscall]<CStone*, int, uint>)(lpVtbl[6]))((CStone*)Unsafe.AsPointer(ref this), param0);
         }
@@ -400,7 +406,7 @@ namespace Forge.S4.Types.Native.Entities
             public delegate* unmanaged[Thiscall]<TSelf*, void*> vfunc5;
 
             [NativeTypeName("DWORD (INT) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> vfunc6;
+            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> PopulateRenderData;
 
             [NativeTypeName("void (DWORD, DWORD) __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, uint, uint, void> vfunc7;

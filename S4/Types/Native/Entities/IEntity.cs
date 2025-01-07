@@ -25,7 +25,7 @@ namespace Forge.S4.Types.Native.Entities
         public IEntity.EntityType entityType;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk0;
+        public byte pad_b;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -33,7 +33,7 @@ namespace Forge.S4.Types.Native.Entities
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("BYTE[6]")]
-        public fixed byte unk1[6];
+        public fixed byte unk_e[6];
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("enum BaseType")]
@@ -43,10 +43,10 @@ namespace Forge.S4.Types.Native.Entities
         public byte selectionFlags;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk2;
+        public byte unk_16;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk3;
+        public byte unk_17;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -57,21 +57,27 @@ namespace Forge.S4.Types.Native.Entities
         public ushort y;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("DWORD")]
-        public uint unk5;
+        public byte unk_1c;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("__AnonymousRecord_entities_L108_C17")]
+        public byte unk_1d;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("WORD")]
+        public ushort unk_1e;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("__AnonymousRecord_entities_L110_C17")]
         public IEntity._Anonymous_e__Struct Anonymous;
 
         [NativeInheritance(nameof(IEntity))]
         public byte health;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad0;
+        public byte pad_22;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad1;
+        public byte pad_23;
 
         public byte tribe
         {
@@ -135,8 +141,6 @@ namespace Forge.S4.Types.Native.Entities
 
         public partial struct _Anonymous_e__Struct
         {
-            public void** lpVtbl;
-
             [NativeBitfield("tribe", offset: 0, length: 4)]
             [NativeBitfield("player", offset: 4, length: 4)]
             public byte _bitfield;
@@ -222,7 +226,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(6)]
         [return: NativeTypeName("DWORD")]
-        public uint vfunc6(int param0)
+        public uint PopulateRenderData(int param0)
         {
             return ((delegate* unmanaged[Thiscall]<IEntity*, int, uint>)(lpVtbl[6]))((IEntity*)Unsafe.AsPointer(ref this), param0);
         }
@@ -380,7 +384,7 @@ namespace Forge.S4.Types.Native.Entities
 
             [VtblIndex(6)]
             [return: NativeTypeName("DWORD")]
-            uint vfunc6(int param0);
+            uint PopulateRenderData(int param0);
 
             [VtblIndex(7)]
             void vfunc7([NativeTypeName("DWORD")] uint param0, [NativeTypeName("DWORD")] uint param1);
@@ -468,7 +472,7 @@ namespace Forge.S4.Types.Native.Entities
             public delegate* unmanaged[Thiscall]<TSelf*, void*> vfunc5;
 
             [NativeTypeName("DWORD (INT) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> vfunc6;
+            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> PopulateRenderData;
 
             [NativeTypeName("void (DWORD, DWORD) __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, uint, uint, void> vfunc7;

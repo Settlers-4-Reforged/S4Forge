@@ -25,7 +25,7 @@ namespace Forge.S4.Types.Native.Entities
         public IEntity.EntityType entityType;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk0;
+        public byte pad_b;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -33,7 +33,7 @@ namespace Forge.S4.Types.Native.Entities
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("BYTE[6]")]
-        public fixed byte unk1[6];
+        public fixed byte unk_e[6];
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("enum BaseType")]
@@ -43,10 +43,10 @@ namespace Forge.S4.Types.Native.Entities
         public byte selectionFlags;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk2;
+        public byte unk_16;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte unk3;
+        public byte unk_17;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("WORD")]
@@ -57,21 +57,27 @@ namespace Forge.S4.Types.Native.Entities
         public ushort y;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("DWORD")]
-        public uint unk5;
+        public byte unk_1c;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("__AnonymousRecord_entities_L108_C17")]
+        public byte unk_1d;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("WORD")]
+        public ushort unk_1e;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("__AnonymousRecord_entities_L110_C17")]
         public IEntity._Anonymous_e__Struct Anonymous;
 
         [NativeInheritance(nameof(IEntity))]
         public byte health;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad0;
+        public byte pad_22;
 
         [NativeInheritance(nameof(IEntity))]
-        public byte pad1;
+        public byte pad_23;
 
         public byte tribe
         {
@@ -104,187 +110,187 @@ namespace Forge.S4.Types.Native.Entities
         }
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public byte unk6;
+        public byte animationFrameIndex;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public byte unk7;
-
-        [NativeInheritance(nameof(IAnimatedEntity))]
-        [NativeTypeName("WORD")]
-        public ushort unk8;
+        public byte unk_25;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("WORD")]
-        public ushort unk9;
+        public ushort unk_26;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("WORD")]
-        public ushort unk10;
+        public ushort nextEntity;
+
+        [NativeInheritance(nameof(IAnimatedEntity))]
+        [NativeTypeName("WORD")]
+        public ushort prevEntity;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk11;
+        public uint globalTick;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk12;
+        public uint unk_30;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public int unk13;
+        public int unk_34;
 
         [NativeInheritance(nameof(IAnimatedEntity))]
-        public int unk14;
+        public int unk_38;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk15;
+        public uint unk_3c;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("CHAR")]
-        public sbyte unk16;
+        public sbyte unk_40;
 
         [NativeInheritance(nameof(IMovingEntity))]
-        public byte unk17;
+        public byte unk_41;
 
         [NativeInheritance(nameof(IMovingEntity))]
-        public byte unk18;
+        public byte unk_42;
 
         [NativeInheritance(nameof(IMovingEntity))]
-        public byte pad2;
-
-        [NativeInheritance(nameof(IMovingEntity))]
-        [NativeTypeName("WORD")]
-        public ushort unk19;
+        public byte pad_43;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("WORD")]
-        public ushort unk20;
+        public ushort unk_44;
+
+        [NativeInheritance(nameof(IMovingEntity))]
+        [NativeTypeName("WORD")]
+        public ushort unk_46;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk21;
+        public uint unk_48;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk22;
+        public uint unk_4c;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("LPVOID")]
-        public void* unk23;
+        public void* unk_50;
 
         [NativeInheritance(nameof(IMovingEntity))]
         [NativeTypeName("DWORD")]
-        public uint unk24;
+        public uint unk_54;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("LPVOID")]
-        public void* unk25;
+        public void* unk_58;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk26;
+        public byte unk_5c;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk27;
+        public byte unk_5d;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk28;
+        public byte unk_5e;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk29;
+        public byte unk_5f;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk30;
+        public byte unk_60;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk31;
+        public byte unk_61;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk32;
+        public byte unk_62;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk33;
+        public byte unk_63;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk34;
+        public byte unk_64;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk35;
+        public byte unk_65;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("WORD")]
-        public ushort unk36;
+        public ushort unk_66;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("DWORD")]
-        public uint unk37;
+        public uint unk_68;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk38;
+        public byte unk_6c;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk39;
+        public byte unk_6d;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk40;
+        public byte unk_6e;
 
         [NativeInheritance(nameof(CVehicle))]
-        public byte unk41;
-
-        [NativeInheritance(nameof(CVehicle))]
-        [NativeTypeName("WORD")]
-        public ushort unk42;
+        public byte unk_6f;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("WORD")]
-        public ushort unk43;
+        public ushort unk_70;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("WORD")]
-        public ushort unk44;
+        public ushort unk_72;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("WORD")]
-        public ushort unk45;
+        public ushort unk_74;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("WORD")]
-        public ushort unk46;
+        public ushort unk_76;
+
+        [NativeInheritance(nameof(CVehicle))]
+        [NativeTypeName("WORD")]
+        public ushort unk_78;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("BYTE[6]")]
-        public fixed byte unk47[6];
+        public fixed byte unk_7a[6];
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("INT32")]
-        public int unk48;
+        public int unk_80;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("INT32")]
-        public int unk49;
+        public int unk_84;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("DWORD")]
-        public uint unk50;
+        public uint unk_88;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("DWORD")]
-        public uint unk51;
+        public uint unk_8c;
 
         [NativeInheritance(nameof(CVehicle))]
         [NativeTypeName("DWORD")]
-        public uint unk52;
+        public uint unk_90;
 
         [NativeInheritance(nameof(CWheeler))]
         [NativeTypeName("DWORD")]
-        public uint unk53;
+        public uint unk_94;
 
         [NativeInheritance(nameof(CWheeler))]
         [NativeTypeName("DWORD")]
-        public uint unk54;
+        public uint unk_98;
 
         [NativeInheritance(nameof(CWheeler))]
         [NativeTypeName("DWORD")]
-        public uint unk55;
+        public uint unk_9c;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(0)]
@@ -334,7 +340,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(6)]
         [return: NativeTypeName("DWORD")]
-        public uint vfunc6(int param0)
+        public uint PopulateRenderData(int param0)
         {
             return ((delegate* unmanaged[Thiscall]<CWheeler*, int, uint>)(lpVtbl[6]))((CWheeler*)Unsafe.AsPointer(ref this), param0);
         }
@@ -731,7 +737,7 @@ namespace Forge.S4.Types.Native.Entities
             public delegate* unmanaged[Thiscall]<TSelf*, void*> vfunc5;
 
             [NativeTypeName("DWORD (INT) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> vfunc6;
+            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> PopulateRenderData;
 
             [NativeTypeName("void (DWORD, DWORD) __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, uint, uint, void> vfunc7;

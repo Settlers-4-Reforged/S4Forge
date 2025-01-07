@@ -119,11 +119,10 @@ namespace Forge.S4.Game {
         }
 
         public unsafe IEntity* GetEntity(int x, int y) {
-            unsafe {
-                ushort* entityId = BackingEntityMap[y * world.Size + x];
+            ushort* entityId = BackingEntityMap[y * world.Size + x];
 
-                return entityId == null ? null : GetEntity(*entityId);
-            }
+            return entityId == null ? null : GetEntity(*entityId);
+
         }
 
     }

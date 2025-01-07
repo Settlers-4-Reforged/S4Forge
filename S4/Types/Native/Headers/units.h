@@ -3,34 +3,35 @@
 #include "entities.h"
 
 struct CVehicle : public IMovingEntity {
-    /* +88 _ */ LPVOID unk25;
-    /* +92 S */ BYTE unk26;
-    /* +93 S */ BYTE unk27;
-    /* +94 S */ BYTE unk28;
-    /* +95 S */ BYTE unk29;
-    /* +96 S */ BYTE unk30;
-    /* +97 S */ BYTE unk31;
-    /* +98 S */ BYTE unk32;
-    /* +99 S */ BYTE unk33;
-    /* +100 S */ BYTE unk34;
-    /* +101 S */ BYTE unk35;
-    /* +102 S */ WORD unk36;
-    /* +104 S */ DWORD unk37;
-    /* +108 S */ BYTE unk38;
-    /* +109 S */ BYTE unk39;
-    /* +110 S */ BYTE unk40;
-    /* +111 S */ BYTE unk41;
-    /* +112 S */ WORD unk42;
-    /* +114 S */ WORD unk43;
-    /* +116 S */ WORD unk44;
-    /* +118 S */ WORD unk45;
-    /* +120 S */ WORD unk46;
-    /* +122 _ */ BYTE unk47[6];
-    /* +128 s */ INT32 unk48;
-    /* +132 s */ INT32 unk49;
-    /* +136 _ */ DWORD unk50;
-    /* +140 _ */ DWORD unk51;
-    /* +144 _ */ DWORD unk52;
+    /* +88 _ */ LPVOID unk_58;
+    /* +92 S */ BYTE unk_5c;
+    /* +93 S */ BYTE unk_5d;
+    /* +94 S */ BYTE unk_5e;
+    /* +95 S */ BYTE unk_5f;
+    /* +96 S */ BYTE unk_60;
+    /* +97 S */ BYTE unk_61;
+    /* +98 S */ BYTE unk_62;
+    /* +99 S */ BYTE unk_63;
+    /* +100 S */ BYTE unk_64;
+    /* +101 S */ BYTE unk_65;
+    /* +102 S */ WORD unk_66;
+    /* +104 S */ DWORD unk_68;
+    /* +108 S */ BYTE unk_6c;
+    /* +109 S */ BYTE unk_6d;
+    /* +110 S */ BYTE unk_6e;
+    /* +111 S */ BYTE unk_6f;
+    /* +112 S */ WORD unk_70;
+    /* +114 S */ WORD unk_72;
+    /* +116 S */ WORD unk_74;
+    /* +118 S */ WORD unk_76;
+    /* +120 S */ WORD unk_78;
+    /* +122 _ */ BYTE unk_7a[6];
+    /* +128 s */ INT32 unk_80;
+    /* +132 s */ INT32 unk_84;
+    /* +136 _ */ DWORD unk_88;
+    /* +140 _ */ DWORD unk_8c;
+    /* +144 _ */ DWORD unk_90;
+
 
     virtual VOID vfunc30() = 0;
     virtual VOID vfunc31() = 0;
@@ -59,45 +60,45 @@ struct CVehicle : public IMovingEntity {
     virtual VOID vfunc54(DWORD) = 0;
 };
 struct CWheeler : public CVehicle {
-    /* +148 S */ DWORD unk53;
-    /* +152 S */ DWORD unk54;
-    /* +156 S */ DWORD unk55;
+    /* +148 S */ DWORD unk_94;
+    /* +152 S */ DWORD unk_98;
+    /* +156 S */ DWORD unk_9c;
 
     virtual VOID vfunc55() = 0;
     virtual VOID vfunc56(INT) = 0;
 };
 class CShip : public CVehicle {
-    /* +148 S */ DWORD unk53;
+    /* +148 S */ DWORD unk_94;
 };
 struct CCart : public CWheeler {
-    /* +160 s */ INT32 unk56;
-    /* +164 s */ INT32 unk57;
-    /* +168 _ */ DWORD unk58;
-    /* +172 s */ INT unk59;
-    /* +176 s */ INT unk60;
-    /* +180 _ */ DWORD unk61;
-    /* +184 S */ BYTE unk62;
-    /* +185 S */ BYTE unk63;
-    /* +186 S */ BYTE unk64;
-    /* +187 S */ BYTE unk65;
-    /* +188 S */ CHAR unk66;
-    /* +189 S */ CHAR unk67;
-    /* +190 S */ BYTE unk68;
-    /* +191 S */ BYTE unk69;
-    /* +192 _ */ DWORD unk70;
-    /* +196 S */ DWORD unk71;
-    /* +200 s */ DWORD unk72[18]; // probably a byte array or some object
-    /* +272 S */ CHAR unk73;
-    /* +273 S */ CHAR unk74;
-    /* +274 S */ CHAR unk75;
-    /* +275 _ */ BYTE unk76; // probably pad
-    /* +276 S */ DWORD unk77;
-    /* +280 S */ DWORD unk78;
-    /* +284 S */ DWORD unk79;
-    /* +288 S */ DWORD unk80;
-    /* +292 S */ BYTE unk81;
-    /* +293 S */ CHAR unk82;
-    /* +294 S */ WORD pad4;
+    /* +160 s */ INT32 unk_a0;
+    /* +164 s */ INT32 unk_a4;
+    /* +168 _ */ DWORD unk_a8;
+    /* +172 s */ INT unk_ac;
+    /* +176 s */ INT unk_b0;
+    /* +180 _ */ DWORD unk_b4;
+    /* +184 S */ BYTE unk_b8;
+    /* +185 S */ BYTE unk_b9;
+    /* +186 S */ BYTE unk_ba;
+    /* +187 S */ BYTE unk_bb;
+    /* +188 S */ CHAR unk_bc;
+    /* +189 S */ CHAR unk_bd;
+    /* +190 S */ BYTE unk_be;
+    /* +191 S */ BYTE unk_bf;
+    /* +192 _ */ DWORD unk_c0;
+    /* +196 S */ DWORD unk_c4;
+    /* +200 s */ DWORD unk_c8[18]; // probably a byte array or some object
+    /* +272 S */ CHAR unk_110;
+    /* +273 S */ CHAR unk_111;
+    /* +274 S */ CHAR unk_112;
+    /* +275 _ */ BYTE unk_113; // probably pad
+    /* +276 S */ DWORD unk_114;
+    /* +280 S */ DWORD unk_118;
+    /* +284 S */ DWORD unk_11c;
+    /* +288 S */ DWORD unk_120;
+    /* +292 S */ BYTE unk_124;
+    /* +293 S */ CHAR unk_125;
+    /* +294 S */ WORD pad_126;
 
     virtual INT vfunc57() = 0; // todo: verify whether this gets added to the CWheeler vtable
 };
@@ -109,39 +110,39 @@ struct CWarriorBehaviour {
     virtual VOID warriorfunc4() = 0;
 };
 struct CCatapult : public CWheeler, public CWarriorBehaviour {
-    /* +160 _ */ DWORD unk56[6];
-    /* +184 S */ CHAR unk57;
-    /* +185 _ */ BYTE pad5[3];
-    /* +188 S */ DWORD unk58;
-    /* +192 S */ DWORD unk59;
+    /* +160 _ */ DWORD unk_a0[6];
+    /* +184 S */ CHAR unk_b8;
+    /* +185 _ */ BYTE pad_b9[3];
+    /* +188 S */ DWORD unk_bc;
+    /* +192 S */ DWORD unk_c0;
 
     virtual DWORD vfunc57() = 0; // always returns 4. todo: verify whether this gets added to the CWheeler vtable
 };
 struct CWarShip : public CShip, public CWarriorBehaviour {
-    /* +152 _ */ DWORD unk54;
-    /* +156 _ */ DWORD unk55;
-    /* +160 _ */ DWORD unk56;
-    /* +164 S */ DWORD unk57;
-    /* +168 S */ DWORD unk58;
+    /* +152 _ */ DWORD unk_98;
+    /* +156 _ */ DWORD unk_9c;
+    /* +160 _ */ DWORD unk_a0;
+    /* +164 S */ DWORD unk_a4;
+    /* +168 S */ DWORD unk_a8;
 
     virtual DWORD vfunc55() = 0; // always returns 4. todo: verify whether this gets added to the CWheeler vtable
 };
 struct CFerryShip : public CShip {
-    /* +152 _ */ DWORD unk54;
-    /* +156 s */ DWORD unk55;
-    /* +160 s */ DWORD unk56;
-    /* +164 s */ DWORD unk57;
-    /* +168 s */ DWORD unk58;
-    /* +172 s */ DWORD unk59;
-    /* +176 s */ DWORD unk60;
-    /* +180 s */ DWORD unk61;
-    /* +184 s */ DWORD unk62;
-    /* +188 s */ DWORD unk63;
+    /* +152 _ */ DWORD unk_98;
+    /* +156 s */ DWORD unk_9c;
+    /* +160 s */ DWORD unk_a0;
+    /* +164 s */ DWORD unk_a4;
+    /* +168 s */ DWORD unk_a8;
+    /* +172 s */ DWORD unk_ac;
+    /* +176 s */ DWORD unk_b0;
+    /* +180 s */ DWORD unk_b4;
+    /* +184 s */ DWORD unk_b8;
+    /* +188 s */ DWORD unk_bc;
 };
 struct CTransportShip : public CShip {
-    /* +152 S */ DWORD unk54[31];
-    /* +276 S */ BYTE unk55;
-    /* +277 S */ BYTE pad56[3];
+    /* +152 S */ DWORD unk_98[31];
+    /* +276 S */ BYTE unk_114;
+    /* +277 S */ BYTE pad_115[3];
 };
 struct CMayaCatapult : public CCatapult {/* todo: fill struct */ };
 struct CRomanCatapult : public CCatapult {/* todo: fill struct */ };
