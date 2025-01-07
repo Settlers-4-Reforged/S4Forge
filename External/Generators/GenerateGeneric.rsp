@@ -1,0 +1,6 @@
+--output
+../../S4/Types/Native/
+--file
+s4.h
+--namespace
+Forge.S4.Types.Native
