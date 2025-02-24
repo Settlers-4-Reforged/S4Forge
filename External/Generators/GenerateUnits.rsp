@@ -1,6 +1,6 @@
 --output
 ../../S4/Types/Native/Entities/Units/
 --file
-units.h
+../Entities/units.h
 --namespace
 Forge.S4.Types.Native.Entities

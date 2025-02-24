@@ -11,7 +11,7 @@ generate-macro-bindings
 generate-marker-interfaces
 generate-native-inheritance-attribute
 generate-native-bitfield-attribute
-generate-template-bindings 
+
 generate-setslastsystemerror-attribute
 generate-unmanaged-constants
 generate-vtbl-index-attribute

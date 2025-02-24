@@ -13,7 +13,8 @@ namespace Forge.S4.Managers {
         Game.IEventApi EventApi,
         Game.IGfxEngineApi GfxEngineApi,
         Game.IPlayerApi PlayerApi,
-        Game.ISoundApi SoundApi) {
+        Game.ISoundApi SoundApi,
+        Game.IConfigApi ConfigApi) {
 
         public static void ResolveDependencies() {
             DI.Dependencies.Register<ApiManager>(Reuse.Singleton);
@@ -26,6 +27,7 @@ namespace Forge.S4.Managers {
             DI.Dependencies.Register<Game.IGfxEngineApi, Game.GfxEngineApi>(Reuse.Singleton);
             DI.Dependencies.Register<Game.IPlayerApi, Game.PlayerApi>(Reuse.Singleton);
             DI.Dependencies.Register<Game.ISoundApi, Game.SoundApi>(Reuse.Singleton);
+            DI.Dependencies.Register<Game.IConfigApi, Game.ConfigApi>(Reuse.Singleton);
 
             DI.Dependencies.Register<IWorld, World>();
         }

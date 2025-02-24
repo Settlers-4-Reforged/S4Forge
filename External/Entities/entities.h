@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "s4.h"
+#include "../s4.h"
 
 class ISettlerRole : public CPersistance {
     /* + 4 S */ CHAR unk_04;
