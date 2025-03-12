@@ -1,10 +1,11 @@
 ﻿using DryIoc;
 
 using Forge.Config;
+using Forge.Logging;
 
-using NetModAPI;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -26,11 +27,11 @@ namespace Forge.Engine {
 
         internal static void RegisterAvailableEngines(Container dependencies) {
             Logger.LogInfo("Searching for available engines...");
-            Logger.LogDebug($"Searching for the following engines: {string.Join(", ", Engines)}");
+            Logger.LogDebug("Searching for the following engines: {0}", string.Join(", ", Engines));
 
             foreach (string engine in Engines) {
                 if (!System.IO.File.Exists(AbsoluteEnginePath + engine)) {
-                    Logger.LogWarn($"Engine \"{engine}\" not found at \"{AbsoluteEnginePath}\"");
+                    Logger.LogWarn("Engine \"{0}\" not found at \"{1}\"", engine, AbsoluteEnginePath);
                     continue;
                 }
 
@@ -46,12 +47,11 @@ namespace Forge.Engine {
 
                     dependencies.RegisterMany(new[] { iEngine }, Reuse.Singleton);
 
-                    Logger.LogInfo($"Registered engine \"{engine}\" at \"{AbsoluteEnginePath}\"");
+                    Logger.LogInfo("Registered engine \"{0}\" at \"{1}\"", engine, AbsoluteEnginePath);
                 } catch (Exception ex) {
-                    Logger.LogError($"Failed to load engine \"{engine}\" at \"{AbsoluteEnginePath}\"", ex);
+                    Logger.LogError(ex, "Failed to load engine \"{0}\" at \"{1}\"", engine, AbsoluteEnginePath);
                 }
             }
-
         }
     }
 }
