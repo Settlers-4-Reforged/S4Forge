@@ -15,6 +15,9 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <Platforms>x86</Platforms>
+
+        <!-- Remove warnings for native binding generations -->
+        <NoWarn>CA1051,CA1707,CA1708,CA1715,CA1716</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -52,7 +55,7 @@
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
 
-        <PackageReference Include="ForgeUpdaterManifest" Version="0.3.1">
+        <PackageReference Include="ForgeSDK" Version="0.4.0">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.SourceLink.GitLab" Version="8.0.0" PrivateAssets="All" />
