@@ -104,7 +104,7 @@ namespace Forge.S4.Game {
         public string GetSettingString(string section, string setting, string defaultValue) {
             IntPtr pSection = Marshal.StringToHGlobalAnsi(section);
             IntPtr pSetting = Marshal.StringToHGlobalAnsi(setting);
-            CConfigVar* config = (CConfigVar*)configManager->GetConfigVar((sbyte*)pSection, (sbyte*)pSetting);
+            CConfigVar* config = configManager->GetConfigVar((sbyte*)pSection, (sbyte*)pSetting);
             Marshal.FreeHGlobal(pSection);
             Marshal.FreeHGlobal(pSetting);
 
@@ -134,6 +134,7 @@ namespace Forge.S4.Game {
             for (int i = 0; i < size; i++) {
                 values[i] = intArrayConfig[i];
             }
+
             return values;
         }
 
