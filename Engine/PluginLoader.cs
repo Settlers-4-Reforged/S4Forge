@@ -37,7 +37,7 @@ namespace Forge.Engine {
             /// <summary>
             /// An additional folder with other dll dependencies to add to the library search path.
             /// </summary>
-            [JsonPropertyName("library_folder")]
+            [JsonPropertyName("libraryFolder")]
             public string? LibraryFolder { get; set; }
 
             public struct Dependency {
@@ -57,8 +57,7 @@ namespace Forge.Engine {
             public string? directory;
         }
 
-        static readonly string PluginDirectory = Path.Combine(Environment.CurrentDirectory + "/plugins/Forge/Plugins");
-        const string PluginLibFolder = "lib";
+        static readonly string PluginDirectory = Path.Combine(Environment.CurrentDirectory + "/plugins/");
 
         public static void InformPluginsLoadedCallbacks(Container dependencies) {
             foreach (IAfterPluginsLoaded callback in dependencies.ResolveMany<IAfterPluginsLoaded>()) {
@@ -75,10 +74,15 @@ namespace Forge.Engine {
             };
 
             foreach (string directory in directories) {
+                // Skip the Forge directory
+                if (directory.StartsWith(Path.Combine(PluginDirectory, "Forge"), StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+
                 // Check if config file exists
                 string configFilePath = Path.Combine(directory, PluginInfo.ConfigFileName);
                 if (!File.Exists(configFilePath)) {
-                    Logger.LogError(null, $"Plugin '{directory}' is missing a config file.");
+                    Logger.LogError(null, $"Plugin at '{directory}' is missing a config file.");
                     continue;
                 }
 
@@ -107,13 +111,13 @@ namespace Forge.Engine {
                     string directory = plugin.directory;
 
                     bool missingDependencies = false;
-                    string[] skippedDependencies = ["Forge", "UX-Engine"];
+                    string[] skippedDependencies = ["Forge", "UXEngine"];
                     var filteredDependencies = plugin.Dependencies.Where(d => !skippedDependencies.Contains(d.Id)).ToArray();
                     foreach (PluginInfo.Dependency dependency in filteredDependencies) {
                         PluginInfo? foundDependency = plugins.FirstOrDefault(p => p.Id == dependency.Id);
                         if (foundDependency != null) continue;
 
-                        Logger.LogError(null, $"Plugin '{directory}' has a dependency '{dependency.Id}' that does not exist.");
+                        Logger.LogError(null, "Plugin '{0}' has a dependency '{1}' that does not exist.", plugin.Id, dependency.Id);
                         missingDependencies = true;
                         break;
                     }
@@ -130,14 +134,15 @@ namespace Forge.Engine {
                         continue;
                     }
 
-                    Logger.LogInfo($"Loading Plugin '{plugin.Id}'...");
+                    Logger.LogInfo("Loading Plugin '{0}'...", plugin.Id);
 
                     AssemblyInitializations.AddFolderLoadSource(directory);
-                    AssemblyInitializations.AddFolderLoadSource(Path.Combine(directory, PluginLibFolder));
+
+                    if (plugin.LibraryFolder != null)
+                        AssemblyInitializations.AddFolderLoadSource(Path.Combine(directory, plugin.LibraryFolder));
 
                     LoadPlugin(dependencies, pluginPath, directory);
                 } catch (Exception e) {
-                    string stackTrace = e.StackTrace;
                     while (e.InnerException != null) {
                         e = e.InnerException;
                     }
@@ -152,7 +157,7 @@ namespace Forge.Engine {
         }
 
         private static bool CompareVersionsWithWildcard(string requiredVersion, string foundVersion) {
-            if (!requiredVersion.Contains("*")) {
+            if (!requiredVersion.Contains('*')) {
                 return requiredVersion == foundVersion;
             }
 
