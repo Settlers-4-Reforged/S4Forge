@@ -26,37 +26,37 @@ class ISettlerRole : public CPersistance {
     /* + 40 _ */ WORD unk_28;
     /* + 42 _ */ WORD unk_2A;
 
-    virtual ISettlerRole* vfunc2(BYTE) = 0;
-    virtual DWORD vfunc3() = 0; // todo: type me
-    virtual VOID walk(LPVOID) = 0; // this may also check the landscape to adjust the walk speed, it will also register for logic update
-    virtual DWORD vfunc5() = 0; // todo: type me
-    virtual VOID vfunc6(LPVOID) = 0; // may call register logic update
-    virtual DWORD vfunc7() = 0; // todo: type me
-    virtual VOID vfunc8() = 0;
-    virtual DWORD vfunc9() = 0; // todo: type me
-    virtual DWORD vfunc10() = 0; // todo: type me
-    virtual DWORD vfunc11() = 0; // todo: type me
-    virtual VOID vfunc12(WORD) = 0; // setter for unk_20
-    virtual VOID vfunc13(WORD) = 0; // setter for unk_22
-    virtual DWORD vfunc14() = 0; // todo: type me
-    virtual DWORD vfunc15(INT) = 0; // this accesses a map
-    virtual DWORD vfunc16(INT*) = 0;
-    virtual DWORD vfunc17(DWORD) = 0; // may return the only param
-    virtual DWORD vfunc18() = 0; // todo: type me
-    virtual BYTE vfunc19() = 0; // may return 0
-    virtual VOID vfunc20(INT, WORD) = 0; // setter for unk_20 and unk_14
-    virtual DWORD vfunc21(INT) = 0; // getter for unk_20 and unk_14
-    virtual DWORD vfunc22() = 0; // may return 0
-    virtual DWORD vfunc23() = 0; // may return 0
-    virtual DWORD vfunc24() = 0; // may return 0
-    virtual DWORD vfunc25() = 0; // may return 0
-    virtual DWORD vfunc26() = 0; // may return 0
-    virtual DWORD vfunc27() = 0; // may return 1
-    virtual DWORD vfunc28() = 0; // may return 0
-    virtual BYTE vfunc29() = 0;  // may return 0
-    virtual DWORD vfunc30(INT, INT) = 0; // accesses the map
-    virtual BYTE vfunc31(LPVOID) = 0;
-    virtual VOID vfunc32(INT, INT**, WORD, WORD, DWORD) = 0;
+    virtual ISettlerRole* vfunc2(BYTE);
+    virtual DWORD vfunc3(); // todo: type me
+    virtual void walk(LPVOID); // this may also check the landscape to adjust the walk speed, it will also register for logic update
+    virtual DWORD vfunc5(); // todo: type me
+    virtual void vfunc6(LPVOID); // may call register logic update
+    virtual DWORD vfunc7(); // todo: type me
+    virtual void vfunc8();
+    virtual DWORD vfunc9(); // todo: type me
+    virtual DWORD vfunc10(); // todo: type me
+    virtual DWORD vfunc11(); // todo: type me
+    virtual void vfunc12(WORD); // setter for unk_20
+    virtual void vfunc13(WORD); // setter for unk_22
+    virtual DWORD vfunc14(); // todo: type me
+    virtual DWORD vfunc15(INT); // this accesses a map
+    virtual DWORD vfunc16(INT*);
+    virtual DWORD vfunc17(DWORD); // may return the only param
+    virtual DWORD vfunc18(); // todo: type me
+    virtual BYTE vfunc19(); // may return 0
+    virtual void vfunc20(INT, WORD); // setter for unk_20 and unk_14
+    virtual DWORD vfunc21(INT); // getter for unk_20 and unk_14
+    virtual DWORD vfunc22(); // may return 0
+    virtual DWORD vfunc23(); // may return 0
+    virtual DWORD vfunc24(); // may return 0
+    virtual DWORD vfunc25(); // may return 0
+    virtual DWORD vfunc26(); // may return 0
+    virtual DWORD vfunc27(); // may return 1
+    virtual DWORD vfunc28(); // may return 0
+    virtual BYTE vfunc29();  // may return 0
+    virtual DWORD vfunc30(INT, INT); // accesses the map
+    virtual BYTE vfunc31(LPVOID);
+    virtual void vfunc32(INT, INT**, WORD, WORD, DWORD);
 };
 class IBuildingRole : public CPersistance {
     // todo
@@ -81,10 +81,12 @@ struct IEntity : public CPersistance {
     } entityType;
     /* +11 _ */ BYTE pad_b; // unused alignment byte (?)
     /* +12 S */ WORD objectId; // this is the settler/building id etc
-    /* +14 _ */ BYTE unk_e[6]; // unused bytes (?), none of them are serialized
+    /* +14 _ */ BYTE unk_e;
+    /* +15 _ */ BYTE unk_f;
+    /* +16 _ */ DWORD unk_10;
     /* +20 S */
     enum BaseType : BYTE {
-        Civilian = 0, // civilian building or object like wheat plant etc (wheatplant has settlerType == 209 and goodtype == 0)
+        Civilian, // civilian building or object like wheat plant etc (wheatplant has settlerType == 209 and goodtype == 0)
         Swordman = 2,
         Bowman,
         Racespecial,
@@ -116,29 +118,29 @@ struct IEntity : public CPersistance {
     /* +34 _ */ BYTE pad_22;
     /* +35 _ */ BYTE pad_23;
 
-    virtual IEntity* vfunc2(LPVOID) = 0; // probably some kind of destroy/dispose method
-    virtual DWORD clearSelection() = 0;
-    virtual VOID vfunc4() = 0; // something with map access
-    virtual LPVOID vfunc5() = 0;
-    virtual DWORD PopulateRenderData(INT) = 0; // Populates the render data object with the current state of the entity
-    virtual VOID vfunc7(DWORD, DWORD) = 0;
-    virtual VOID vfunc8(DWORD) = 0;
-    virtual VOID vfunc9() = 0;
-    virtual DWORD vfunc10() = 0; // simple getter for buildings
-    virtual DWORD vfunc11() = 0; // returns always 0 for buildings
-    virtual VOID vfunc12() = 0; // does nothing for buildings
-    virtual VOID vfunc13(INT) = 0;
-    virtual VOID vfunc14() = 0;
-    virtual DWORD vfunc15() = 0;  // returns always 0 for buildings
-    virtual DWORD vfunc16() = 0;  // returns always 0 for buildings
-    virtual VOID vfunc17(INT, INT) = 0;
-    virtual DWORD vfunc18(INT) = 0;
-    virtual VOID vfunc19() = 0;
-    virtual VOID vfunc20(DWORD) = 0;
-    virtual DWORD vfunc21() = 0;  // returns always 0 for buildings
-    virtual DWORD vfunc22() = 0;  // returns always 0 for buildings
-    virtual DWORD vfunc23() = 0;  // returns always 0 for buildings
-    virtual DWORD vfunc24() = 0;  // returns always 0 for buildings
+    virtual IEntity* vfunc2(LPVOID); // probably some kind of destroy/dispose method
+    virtual DWORD vfunc3();
+    virtual void vfunc4(); // something with map access
+    virtual LPVOID PopulateRenderData(); // Populates the render data object with the current state of the entity
+    virtual DWORD Heal(DWORD health); 
+    virtual void DamageBy(DWORD damage, DWORD attackingEntityId);
+    virtual void Damage(DWORD damage);
+    virtual void vfunc9();
+    virtual DWORD GetHealth(); // simple getter for buildings
+    virtual DWORD vfunc11(); // returns always 0 for buildings
+    virtual void vfunc12(); // does nothing for buildings
+    virtual void vfunc13(INT);
+    virtual void vfunc14();
+    virtual DWORD vfunc15();  // returns always 0 for buildings
+    virtual DWORD vfunc16();  // returns always 0 for buildings
+    virtual void vfunc17(INT, INT);
+    virtual DWORD vfunc18(INT);
+    virtual void vfunc19();
+    virtual void vfunc20(DWORD);
+    virtual DWORD vfunc21();  // returns always 0 for buildings
+    virtual DWORD vfunc22();  // returns always 0 for buildings
+    virtual DWORD vfunc23();  // returns always 0 for buildings
+    virtual DWORD vfunc24();  // returns always 0 for buildings
 };
 struct IAnimatedEntity : public IEntity {
     /* +36 S */ BYTE animationFrameIndex; // Seems to be the current frame of the animation
@@ -151,9 +153,9 @@ struct IAnimatedEntity : public IEntity {
     /* +52 s */ INT unk_34; // Points to a CEntityEvent
     /* +56 s */ INT unk_38; // Points to a CEntityEvent
 
-    virtual VOID vfunc25() = 0;
-    virtual VOID vfunc26() = 0;
-    virtual VOID vfunc27(DWORD) = 0;
+    virtual void vfunc25();
+    virtual void vfunc26();
+    virtual void vfunc27(DWORD);
 };
 struct IMovingEntity : public IAnimatedEntity {
     /* +60 S */ DWORD unk_3c;
@@ -167,8 +169,8 @@ struct IMovingEntity : public IAnimatedEntity {
     /* +76 s */ DWORD unk_4c;
     /* +80 _ */ LPVOID unk_50;
     /* +84 _ */ DWORD unk_54;
-    virtual VOID vfunc28(LPVOID, WORD) = 0;
-    virtual BYTE vfunc29() = 0;
+    virtual void vfunc28(LPVOID, WORD);
+    virtual BYTE vfunc29();
 };
 struct CAnimal : public IMovingEntity {
     /* +88 S */ WORD unk_58;
@@ -184,14 +186,14 @@ struct CAnimal : public IMovingEntity {
     /* +116 _ */ DWORD unk_74;
     /* +120 S */ DWORD unk_78;
 
-    virtual VOID vfunc30() = 0;
-    virtual DWORD vfunc31() = 0; // todo:
-    virtual VOID vfunc32(CHAR) = 0; // this is probably the default state machine for animals
+    virtual void vfunc30();
+    virtual DWORD vfunc31(); // todo:
+    virtual void vfunc32(CHAR); // this is probably the default state machine for animals
 };
 struct CSettler : public IMovingEntity {
     /* +88 _ */ ISettlerRole* role; // the settler role object
 
-    virtual DWORD onUpdate() = 0; // this will dispatch the call to the onUdate of the role object
+    virtual DWORD onUpdate(); // this will dispatch the call to the onUdate of the role object
 };
 struct CLandAnimal : public CAnimal {
     /* +124 S */ DWORD unk_7c;
@@ -216,10 +218,10 @@ struct CBuilding : public IAnimatedEntity {
     /* +84 s */ DWORD unk_54;
     /* +88 S */ DWORD unk_58;
 
-    virtual VOID vfunc28() = 0;
-    virtual VOID vfunc29(DWORD) = 0;
-    virtual VOID vfunc30(DWORD, DWORD**) = 0;
-    virtual VOID vfunc31(DWORD) = 0;
+    virtual void vfunc28();
+    virtual void vfunc29(DWORD);
+    virtual void vfunc30(DWORD, DWORD**);
+    virtual void vfunc31(DWORD);
 };
 struct CPile : public IAnimatedEntity {
     /* +60 _ */ DWORD unk_3c;
@@ -239,14 +241,14 @@ struct CPile : public IAnimatedEntity {
     /* +80 S */ IPileRole* role;
     /* +84 S */ LPVOID unk_54;
 
-    virtual VOID vfunc28(DWORD) = 0;
+    virtual void vfunc28(DWORD);
 };
 struct IDecoObject : public IAnimatedEntity {
     /* +60 _ */ DWORD unk_3c;
     /* +64 S */ DWORD unk_40;
 
-    virtual DWORD vfunc28(CHAR) = 0;
-    virtual BYTE vfunc29() = 0;
+    virtual DWORD vfunc28(CHAR);
+    virtual BYTE vfunc29();
 };
 struct IFlyingEntity : public IAnimatedEntity {
     /* +60 _ */ DWORD unk_3c;
@@ -260,9 +262,9 @@ struct IFlyingEntity : public IAnimatedEntity {
     /* +80 s */ LPVOID unk_50;
     /* +84 S */ INT32 unk_54;
 
-    virtual VOID vfunc28(DWORD) = 0;
-    virtual VOID vfunc29(DWORD) = 0;
-    virtual VOID vfunc30() = 0;
+    virtual void vfunc28(DWORD);
+    virtual void vfunc29(DWORD);
+    virtual void vfunc30();
 };
 struct CDecoObject : public IDecoObject {
     /* +68 S */ CHAR unk_44;
@@ -277,7 +279,7 @@ struct CMushroom : public IDecoObject {/* todo: fill struct */ };
 struct CPlant : public IDecoObject {/* todo: fill struct */ };
 struct CShadowHerb : public IDecoObject {/* todo: fill struct */ };
 struct CStone : public IDecoObject {
-    virtual VOID vfunc30() = 0;
+    virtual void vfunc30();
 };
 struct CTree : public IDecoObject {
     /* +68 S */ CHAR unk_44;

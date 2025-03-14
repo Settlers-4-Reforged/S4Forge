@@ -32,8 +32,14 @@ namespace Forge.S4.Types.Native.Entities
         public ushort objectId;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("BYTE[6]")]
-        public fixed byte unk_e[6];
+        public byte unk_e;
+
+        [NativeInheritance(nameof(IEntity))]
+        public byte unk_f;
+
+        [NativeInheritance(nameof(IEntity))]
+        [NativeTypeName("DWORD")]
+        public uint unk_10;
 
         [NativeInheritance(nameof(IEntity))]
         [NativeTypeName("enum BaseType")]
@@ -67,7 +73,7 @@ namespace Forge.S4.Types.Native.Entities
         public ushort unk_1e;
 
         [NativeInheritance(nameof(IEntity))]
-        [NativeTypeName("__AnonymousRecord_entities_L110_C17")]
+        [NativeTypeName("__AnonymousRecord_entities_L112_C17")]
         public IEntity._Anonymous_e__Struct Anonymous;
 
         [NativeInheritance(nameof(IEntity))]
@@ -320,7 +326,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(3)]
         [return: NativeTypeName("DWORD")]
-        public uint clearSelection()
+        public uint vfunc3()
         {
             return ((delegate* unmanaged[Thiscall]<CTransportShip*, uint>)(lpVtbl[3]))((CTransportShip*)Unsafe.AsPointer(ref this));
         }
@@ -335,7 +341,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(5)]
         [return: NativeTypeName("LPVOID")]
-        public void* vfunc5()
+        public void* PopulateRenderData()
         {
             return ((delegate* unmanaged[Thiscall]<CTransportShip*, void*>)(lpVtbl[5]))((CTransportShip*)Unsafe.AsPointer(ref this));
         }
@@ -343,23 +349,23 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(6)]
         [return: NativeTypeName("DWORD")]
-        public uint PopulateRenderData(int param0)
+        public uint Heal([NativeTypeName("DWORD")] uint health)
         {
-            return ((delegate* unmanaged[Thiscall]<CTransportShip*, int, uint>)(lpVtbl[6]))((CTransportShip*)Unsafe.AsPointer(ref this), param0);
+            return ((delegate* unmanaged[Thiscall]<CTransportShip*, uint, uint>)(lpVtbl[6]))((CTransportShip*)Unsafe.AsPointer(ref this), health);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(7)]
-        public void vfunc7([NativeTypeName("DWORD")] uint param0, [NativeTypeName("DWORD")] uint param1)
+        public void DamageBy([NativeTypeName("DWORD")] uint damage, [NativeTypeName("DWORD")] uint attackingEntityId)
         {
-            ((delegate* unmanaged[Thiscall]<CTransportShip*, uint, uint, void>)(lpVtbl[7]))((CTransportShip*)Unsafe.AsPointer(ref this), param0, param1);
+            ((delegate* unmanaged[Thiscall]<CTransportShip*, uint, uint, void>)(lpVtbl[7]))((CTransportShip*)Unsafe.AsPointer(ref this), damage, attackingEntityId);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(8)]
-        public void vfunc8([NativeTypeName("DWORD")] uint param0)
+        public void Damage([NativeTypeName("DWORD")] uint damage)
         {
-            ((delegate* unmanaged[Thiscall]<CTransportShip*, uint, void>)(lpVtbl[8]))((CTransportShip*)Unsafe.AsPointer(ref this), param0);
+            ((delegate* unmanaged[Thiscall]<CTransportShip*, uint, void>)(lpVtbl[8]))((CTransportShip*)Unsafe.AsPointer(ref this), damage);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -372,7 +378,7 @@ namespace Forge.S4.Types.Native.Entities
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [VtblIndex(10)]
         [return: NativeTypeName("DWORD")]
-        public uint vfunc10()
+        public uint GetHealth()
         {
             return ((delegate* unmanaged[Thiscall]<CTransportShip*, uint>)(lpVtbl[10]))((CTransportShip*)Unsafe.AsPointer(ref this));
         }
@@ -712,28 +718,28 @@ namespace Forge.S4.Types.Native.Entities
             public delegate* unmanaged[Thiscall]<TSelf*, void*, IEntity*> vfunc2;
 
             [NativeTypeName("DWORD () __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, uint> clearSelection;
+            public delegate* unmanaged[Thiscall]<TSelf*, uint> vfunc3;
 
             [NativeTypeName("void () __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, void> vfunc4;
 
             [NativeTypeName("LPVOID () __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, void*> vfunc5;
+            public delegate* unmanaged[Thiscall]<TSelf*, void*> PopulateRenderData;
 
-            [NativeTypeName("DWORD (INT) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, int, uint> PopulateRenderData;
+            [NativeTypeName("DWORD (DWORD) __attribute__((thiscall))")]
+            public delegate* unmanaged[Thiscall]<TSelf*, uint, uint> Heal;
 
             [NativeTypeName("void (DWORD, DWORD) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, uint, uint, void> vfunc7;
+            public delegate* unmanaged[Thiscall]<TSelf*, uint, uint, void> DamageBy;
 
             [NativeTypeName("void (DWORD) __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, uint, void> vfunc8;
+            public delegate* unmanaged[Thiscall]<TSelf*, uint, void> Damage;
 
             [NativeTypeName("void () __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, void> vfunc9;
 
             [NativeTypeName("DWORD () __attribute__((thiscall))")]
-            public delegate* unmanaged[Thiscall]<TSelf*, uint> vfunc10;
+            public delegate* unmanaged[Thiscall]<TSelf*, uint> GetHealth;
 
             [NativeTypeName("DWORD () __attribute__((thiscall))")]
             public delegate* unmanaged[Thiscall]<TSelf*, uint> vfunc11;
