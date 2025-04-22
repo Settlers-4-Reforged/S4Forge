@@ -23,6 +23,7 @@
     <PropertyGroup>
         <!--NuGet Package settings:-->
         <Title>S4Forge</Title>
+        <PackageId>S4Forge</PackageId>
         <Authors>WizzardMaker</Authors>
         <Description>
             S4Forge - Modding Framework for Settlers 4
@@ -34,7 +35,7 @@
         <Version>$(AssemblyVersion)</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-        <RepositoryUrl>http://gitlab.settlers4-hd.com/s4-plugins/modapi/s4-forge.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Settlers-4-Reforged/S4Forge</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -55,10 +56,10 @@
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
 
-        <PackageReference Include="ForgeSDK" Version="0.4.0">
+        <PackageReference Include="S4Forge.SDK" Version="0.4.3">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.SourceLink.GitLab" Version="8.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
@@ -69,15 +70,15 @@
     <Choose>
         <When Condition="'$(SolutionName)'=='S4ModdingFramework'">
             <ItemGroup>
-                <ProjectReference Include="..\APIWrapper\S4APIWrapper.vcxproj">
-                    <HintPath>S4APIWrapper.asi</HintPath>
+                <ProjectReference Include="..\APIWrapper\S4ForgeBootstrapper.vcxproj">
+                    <HintPath>S4ForgeBootstrapper.asi</HintPath>
                 </ProjectReference>
             </ItemGroup>
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="S4APIWrapper" Version="0.7.*">
-                    <HintPath>S4APIWrapper.asi</HintPath>
+                <PackageReference Include="S4Forge.Bootstrapper" Version="0.8.*">
+                    <HintPath>S4ForgeBootstrapper.asi</HintPath>
                 </PackageReference>
             </ItemGroup>
         </Otherwise>

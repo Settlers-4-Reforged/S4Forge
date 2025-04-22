@@ -32,23 +32,8 @@ and add the following to your `.csproj` file:
 ```
 
 ## How to use
-### Creating a mod
-To create a mod, create a new .Net Standard 2.0 project and add a reference to S4Forge.
-Then, create a class that implements `IPlugin`.
+### Creating a plugin
 
-Modify the `csproj` file to change the extension of the output file to `.nasi`:
-```xml
-<PropertyGroup>
-	<!-- ... -->
-	<!-- Append the folowing line to the main PropertyGroup: -->
-	<TargetExt>.nasi</TargetExt>
-</PropertyGroup>
-
-```
-
-### Loading a mod
-Forge automatically loads all `.nasi` mods in the `plugins\Forge\Plugins` folder of Settlers 4 based on the priority field specified in their respective `IPlugin` implementations.
-Plugins can be loaded from folders inside the `plugins\Forge\Plugins` folder, but only if they are not deeper than 1 folder (e.g. `plugins\Forge\Plugins\MyMod` is fine, but `plugins\Forge\Plugins\MyMod\SubFolder` is not).
 
 #### Using embedded dependencies
 If your mod has dependencies, you can embed them in your mod by adding them as embedded resources.
