@@ -14,7 +14,7 @@ namespace Forge.S4.Types {
     public partial interface IPlayer { }
 
     [GenerateAutomaticInterface]
-    internal class Player : IPlayer {
+    internal sealed class Player : IPlayer {
         private const int PlayerCount = 8;
 
         internal static void RegisterPlayers() {
@@ -26,7 +26,7 @@ namespace Forge.S4.Types {
 
         private Player(uint id) => Id = id;
 
-        public uint Id { get; protected set; }
+        public uint Id { get; set; }
 
         public bool IsLocalPlayer => Id == Forge.Native.ModAPI.API.GetLocalPlayer();
 

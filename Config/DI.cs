@@ -18,7 +18,6 @@ namespace Forge.Config {
         }
 
         static DI() {
-
         }
 
         /// <summary>

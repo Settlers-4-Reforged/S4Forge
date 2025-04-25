@@ -10,7 +10,6 @@ namespace Forge.Engine {
     public interface IModule {
         string Name { get; }
         bool Active { get => true; }
-
         int Priority { get => default; }
 
         /// <summary>

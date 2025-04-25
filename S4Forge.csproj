@@ -17,7 +17,7 @@
         <Platforms>x86</Platforms>
 
         <!-- Remove warnings for native binding generations -->
-        <NoWarn>CA1051,CA1707,CA1708,CA1715,CA1716</NoWarn>
+        <NoWarn>CA1051,CA1707,CA1708,CA1715,CA1716,CS8618,CS0169,CA2211</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup>

@@ -9,12 +9,14 @@ using System.Text;
 
 namespace Forge.S4.Managers {
     internal class ApiManager(
+#pragma warning disable CS9113 // Parameter is unread.
         Game.IEntityApi EntityApi,
         Game.IEventApi EventApi,
         Game.IGfxEngineApi GfxEngineApi,
         Game.IPlayerApi PlayerApi,
         Game.ISoundApi SoundApi,
         Game.IConfigApi ConfigApi) {
+#pragma warning restore CS9113 // Parameter is unread.
 
         public static void ResolveDependencies() {
             DI.Dependencies.Register<ApiManager>(Reuse.Singleton);

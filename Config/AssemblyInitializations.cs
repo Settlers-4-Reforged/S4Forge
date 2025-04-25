@@ -59,7 +59,7 @@ namespace Forge.Config {
                     }
 
                     Logger.LogDebug($"Checking assembly {assembly.GetName().Name} for {resourceName}");
-                    string? resource = Array.Find(assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
+                    string? resource = Array.Find(assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName, StringComparison.InvariantCultureIgnoreCase));
                     if (resource == null)
                         continue;
 
