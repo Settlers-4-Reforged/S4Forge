@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Forge.Engine {
-    public class PluginEnvironment<TPlugin> where TPlugin : IPlugin {
+    public class ModuleEnvironment<TModule> where TModule : IModule {
         /// <summary>
         /// The path of where the plugin is installed to. Typically under "Forge\Plugins\:plugin-name\"
         /// </summary>
@@ -14,7 +14,7 @@ namespace Forge.Engine {
         /// </remarks>
         public string Path { get; init; }
 
-        internal PluginEnvironment(string path) {
+        internal ModuleEnvironment(string path) {
             this.Path = path;
         }
     }

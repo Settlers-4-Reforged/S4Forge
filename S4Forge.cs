@@ -40,25 +40,23 @@ namespace Forge {
 
             DI.RegisterDefaultDependencies(this);
 
-            ModuleLoader.RegisterAvailableEngines(DI.Dependencies);
-
-            var engines = DI.Dependencies.ResolveMany<IEngine>();
-
-            foreach (IEngine engine in engines) {
-                Logger.LogInfo($"Initializing \"{engine.Name}\"...");
-                engine.Initialize();
-                Logger.LogInfo($"Finished initializing \"{engine.Name}\"...");
-            }
+            EngineLoader.LoadAllEngines(DI.Dependencies);
 
             ApiManager.ResolveDependencies();
 
-            if (!PluginLoader.LoadAllPlugins(DI.Dependencies)) {
-                Logger.LogError(null, "There was an error during the loading of a (or all) plugins");
+            if (!ModuleLoader.LoadAllModules(DI.Dependencies)) {
+                Logger.LogError(null, "There was an error during the loading of one (or all) modules");
             } else {
-                Logger.LogInfo("Finished loading all plugins");
+                Logger.LogInfo("Finished loading all modules");
             }
 
-            PluginLoader.InformPluginsLoadedCallbacks(DI.Dependencies);
+            ModuleLoader.InformModulesLoadedCallbacks(DI.Dependencies);
+
+            Logger.LogDebug("Activating all registered plugins");
+            var genericPlugins = DI.Dependencies.Resolve<IPlugin[]>();
+            foreach (var plugin in genericPlugins) {
+                plugin.Activate();
+            }
 
             Logger.LogInfo("Finished initializing Forge");
         }
