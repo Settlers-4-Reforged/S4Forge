@@ -1,4 +1,5 @@
-﻿using Forge.S4.Managers;
+﻿using Forge.Logging;
+using Forge.S4.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -26,34 +27,43 @@ namespace Forge.I18n {
         }
 
         public override string ToString() {
-            return !textTranslations.TryGetValue(gameLanguage, out string output) ? textTranslations["en"] : output;
+            return !textTranslations.TryGetValue(gameLanguage, out string? output) ? textTranslations["en"] : output;
         }
 
-        public static Dictionary<string, TextTranslation> FromCsv(string path) {
-            Dictionary<string, TextTranslation> translations = new Dictionary<string, TextTranslation>();
-            string[] lines = System.IO.File.ReadAllLines(path);
+        // Cache file reads, to not read files multiple times
+        static Dictionary<string, string[]> CsvCache = new Dictionary<string, string[]>();
+        public static TextTranslation FromCsv(string path, string key) {
+            string[] lines;
+
+            if (!CsvCache.TryGetValue(path, out lines!)) {
+                lines = System.IO.File.ReadAllLines(path);
+                CsvCache.Add(path, lines);
+            }
 
             // Example Format:
             // "name;de;en;pl"
-
             string[] fileLanguages = lines[0].Split(',');
 
             for (int lineIndex = 1; lineIndex < lines.Length; lineIndex++) {
                 string[] keys = lines[lineIndex].Split(',');
                 if (keys.Length == 0) continue;
-                if (keys[0].StartsWith("#")) continue; // Commented out line (starts with #)
-                if (keys.Length != fileLanguages.Length + 1) throw new Exception($"Invalid CSV Format at line {lineIndex}");
+                if (keys[0].StartsWith("#", StringComparison.InvariantCultureIgnoreCase)) continue; // Commented out line (starts with #)
+                if (keys.Length != fileLanguages.Length + 1) { Logger.LogError(null, $"Invalid CSV format at line {lineIndex} for translation key {key}"); continue; }
+
+
+                string lineKey = keys[0];
+                if (lineKey != key) continue;
 
                 TextTranslation translation = new TextTranslation();
                 for (int languageIndex = 1; languageIndex < keys.Length; languageIndex++) {
                     translation.textTranslations.Add(fileLanguages[languageIndex], keys[languageIndex]);
                 }
 
-                string name = keys[0];
-                translations.Add(name, translation);
+                return translation;
             }
 
-            return translations;
+            Logger.LogError(null, "Failed to find translation key ${0} in csv '${1}'", key, path);
+            return new TextTranslation(("en", "NOT FOUND"));
         }
     }
 }
