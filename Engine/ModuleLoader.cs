@@ -66,6 +66,9 @@ namespace Forge.Engine {
         }
 
         public static bool LoadAllModules(Container dependencies) {
+            // Ensure folder exists
+            Directory.CreateDirectory(ModuleDirectory);
+
             string[] directories = Directory.GetDirectories(ModuleDirectory);
             List<ModuleInfo> modules = new List<ModuleInfo>();
 
