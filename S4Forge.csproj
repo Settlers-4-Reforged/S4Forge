@@ -56,7 +56,7 @@
 
         <PackageReference Include="DryIoc" Version="5.4.3" />
 
-        <PackageReference Include="S4Forge.SDK" Version="0.4.3">
+        <PackageReference Include="S4Forge.SDK" Version="0.5.*">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
@@ -70,16 +70,12 @@
     <Choose>
         <When Condition="'$(SolutionName)'=='S4ModdingFramework'">
             <ItemGroup>
-                <ProjectReference Include="..\APIWrapper\S4ForgeBootstrapper.vcxproj">
-                    <HintPath>S4ForgeBootstrapper.asi</HintPath>
-                </ProjectReference>
+                <ProjectReference Include="..\APIWrapper\S4ForgeBootstrapper.vcxproj"/>
             </ItemGroup>
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="S4Forge.Bootstrapper" Version="0.8.*">
-                    <HintPath>S4ForgeBootstrapper.asi</HintPath>
-                </PackageReference>
+                <PackageReference Include="S4Forge.Bootstrapper" Version="0.8.*"/>
             </ItemGroup>
         </Otherwise>
     </Choose>
