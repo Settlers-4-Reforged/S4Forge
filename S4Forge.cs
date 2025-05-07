@@ -63,7 +63,14 @@ namespace Forge {
 
         private void AddExceptionHandling() {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            AppDomain.CurrentDomain.FirstChanceException += AppendNativeStackToExceptionHandler;
             Logger.LogInfo("Added exception handling");
+        }
+
+        private void AppendNativeStackToExceptionHandler(object? sender, FirstChanceExceptionEventArgs e) {
+            // NOTE(Jonas): This _could_ lead to a stack overflow as we maybe trip into an exception when rendering the stack trace
+            // I don't quite know how to correctly detect that, so just hopes and prayers keep this code here together
+            e.Exception.Data.Add("Stack", DebugService.GetFullStacktrace(6, true));
         }
 
         private void UnhandledExceptionHandler(object s, UnhandledExceptionEventArgs e) {
