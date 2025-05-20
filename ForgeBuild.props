@@ -4,4 +4,13 @@
     <PropertyGroup>
         <ProjectType>Forge</ProjectType>
     </PropertyGroup>
+
+    <!--Forge Manifest System: -->
+    <PropertyGroup>
+        <ManifestId>S4Forge</ManifestId>
+        <ManifestName>S4Forge</ManifestName>
+        <ManifestType>$(ProjectType)</ManifestType>
+        <ManifestClearResidualFiles>false</ManifestClearResidualFiles>
+        <ManifestEmbedded>true</ManifestEmbedded>
+    </PropertyGroup>
 </Project>
